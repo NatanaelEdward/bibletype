@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-main: #1e1e24;
+    --bg-surface: #24242e;
+    --text-muted: #646669;
+    --text-active: #d1d0c5;
+    --text-error: #ca4754;
+    --text-error-bg: rgba(202, 71, 84, 0.2);
+    --accent: #e2b714;
+  }
+
+  body {
+    background-color: var(--bg-main);
+    color: var(--text-active);
+    font-family: 'JetBrains Mono', monospace;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+/* Caret animations */
+@keyframes caretBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.caret-line {
+  position: absolute;
+  width: 2.5px;
+  background-color: var(--accent);
+  border-radius: 1px;
+  animation: caretBlink 1s infinite;
+  transition: left 0.06s ease, top 0.06s ease;
+  pointer-events: none;
+}
+
+.caret-block {
+  position: absolute;
+  background-color: var(--accent);
+  opacity: 0.5;
+  border-radius: 2px;
+  animation: caretBlink 1.2s infinite;
+  transition: left 0.06s ease, top 0.06s ease, width 0.06s ease;
+  pointer-events: none;
+}
+
+.caret-underline {
+  position: absolute;
+  height: 3px;
+  background-color: var(--accent);
+  border-radius: 1px;
+  animation: caretBlink 1s infinite;
+  transition: left 0.06s ease, top 0.06s ease, width 0.06s ease;
+  pointer-events: none;
+}
+
+/* Smooth windowed typing scroll */
+.typing-scroll-container {
+  scrollbar-width: thin;
+  scrollbar-color: #3b3c46 transparent;
+  scroll-behavior: smooth;
+}
+
+.typing-scroll-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.typing-scroll-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.typing-scroll-container::-webkit-scrollbar-thumb {
+  background-color: #3b3c46;
+  border-radius: 9999px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .caret-line, .caret-block, .caret-underline {
+    animation: none !important;
+    transition: none !important;
+  }
+  .typing-scroll-container {
+    scroll-behavior: auto !important;
+  }
+}

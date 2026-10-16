@@ -1,0 +1,1268 @@
+{
+  "sourceChecksum": "fc1c9ab022fa77af17250d900bf0c175bb3d32870658af231fca7498a99112e5",
+  "sourceCommit": "d741613e179e1ce088a83e120ea76846d0fba481",
+  "datasetChecksum": "f61ba22ba748dcbf5b6b11da7ad768cfb13f473933493813440bcf9bac1ca9f4",
+  "bookTotal": 66,
+  "verseTotal": 31102,
+  "canonicalVerseTotal": 31102,
+  "samples": [
+    {
+      "bookId": "GEN",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Pada mulanya, Allah menciptakan langit dan bumi."
+    },
+    {
+      "bookId": "GEN",
+      "chapter": 25,
+      "verse": 17,
+      "text": "Inilah tahun-tahun dari kehidupan Ismael, yaitu 137 tahun. Kemudian, dia mengembuskan napasnya yang terakhir dan mati, lalu dikumpulkan bersama nenek moyangnya."
+    },
+    {
+      "bookId": "GEN",
+      "chapter": 50,
+      "verse": 26,
+      "text": "Jadi, Yusuf mati pada usia 110 tahun dan mereka merempahi-rempahinya, lalu dia diletakkan dalam sebuah peti di Mesir."
+    },
+    {
+      "bookId": "EXO",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Inilah nama anak-anak Israel yang masuk ke Mesir bersama Yakub, masing-masing datang dengan keluarganya:"
+    },
+    {
+      "bookId": "EXO",
+      "chapter": 20,
+      "verse": 13,
+      "text": "Jangan membunuh."
+    },
+    {
+      "bookId": "EXO",
+      "chapter": 40,
+      "verse": 38,
+      "text": "Sebab, awan TUHAN ada di atas Tenda Suci itu pada siang hari, dan ada api dalam awan itu pada malam hari di mata semua keturunan Israel, di sepanjang perjalanan mereka."
+    },
+    {
+      "bookId": "LEV",
+      "chapter": 1,
+      "verse": 1,
+      "text": "TUHAN memanggil Musa dan berbicara kepadanya dari dalam tenda pertemuan, Dia berfirman,"
+    },
+    {
+      "bookId": "LEV",
+      "chapter": 14,
+      "verse": 29,
+      "text": "Sisa minyak yang ada di tangan imam harus dicurahkan pada kepala orang yang akan ditahirkan untuk mengadakan pengampunan dosa baginya di hadapan TUHAN."
+    },
+    {
+      "bookId": "LEV",
+      "chapter": 27,
+      "verse": 34,
+      "text": "Itulah perintah-perintah yang disampaikan TUHAN kepada Musa di Gunung Sinai bagi umat Israel."
+    },
+    {
+      "bookId": "NUM",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Pada hari pertama bulan kedua, tahun kedua sesudah umat Israel meninggalkan Mesir, TUHAN berfirman kepada Musa dalam tenda pertemuan di padang gurun Sinai,"
+    },
+    {
+      "bookId": "NUM",
+      "chapter": 18,
+      "verse": 16,
+      "text": "Kamu harus menebusnya sesuai dengan nilai sejak berumur satu bulan. Menurut syikal kudus nilainya lima syikal yaitu dua puluh gera."
+    },
+    {
+      "bookId": "NUM",
+      "chapter": 36,
+      "verse": 13,
+      "text": "Itulah perintah dan hukum yang diberikan TUHAN kepada umat Israel melalui Musa di dataran Moab, di tepi Sungai Yordan, seberang Yerikho."
+    },
+    {
+      "bookId": "DEU",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Inilah firman yang disampaikan Musa kepada umat Israel di Sungai Yordan, di padang belantara sebelah Sungai Yordan, yaitu di seberang Suf, di antara padang belantara, di antara Paran dan Tofel, Laban, Hazerot dan Di-Zahab."
+    },
+    {
+      "bookId": "DEU",
+      "chapter": 17,
+      "verse": 10,
+      "text": "Kamu harus melakukan segala sesuatu yang diperintahkannya kepadamu dari tempat yang dipilih oleh TUHAN dan lakukanlah dengan setia segala yang diajarkannya kepadamu."
+    },
+    {
+      "bookId": "DEU",
+      "chapter": 34,
+      "verse": 12,
+      "text": "Seluruh kekuatan yang dahsyat dan segala kengerian yang besar yang telah Musa lakukan di depan mata seluruh orang Israel."
+    },
+    {
+      "bookId": "JOS",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Setelah kematian Musa, hamba TUHAN itu, TUHAN berfirman kepada Yosua anak Nun, pelayan Musa,"
+    },
+    {
+      "bookId": "JOS",
+      "chapter": 12,
+      "verse": 12,
+      "text": "Raja Eglon, satu; Raja Gezer, satu;"
+    },
+    {
+      "bookId": "JOS",
+      "chapter": 24,
+      "verse": 33,
+      "text": "Eleazar, anak Harun, juga mati. Ia dikuburkan di bukit yang diberikan kepada Pinehas, anaknya, di Pegunungan Efraim."
+    },
+    {
+      "bookId": "JDG",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Setelah kematian Yosua, orang-orang Israel bertanya kepada TUHAN, “Siapakah di antara kami yang harus maju lebih dahulu menghadapi orang Kanaan untuk berperang melawan mereka?”"
+    },
+    {
+      "bookId": "JDG",
+      "chapter": 11,
+      "verse": 20,
+      "text": "Namun, Sihon tidak percaya kepada orang Israel untuk melewati daerahnya. Kemudian, Sihon mengumpulkan seluruh rakyatnya untuk berkemah di Yahas, lalu memerangi orang Israel."
+    },
+    {
+      "bookId": "JDG",
+      "chapter": 21,
+      "verse": 25,
+      "text": "Pada waktu itu, belum ada raja di Israel sehingga setiap orang melakukan yang benar sesuai pandangannya sendiri."
+    },
+    {
+      "bookId": "RUT",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Pada masa para hakim memerintah, bencana kelaparan terjadi di negeri itu. Seorang laki-laki dari Betlehem-Yehuda bersama istri dan dua anak laki-lakinya pergi untuk tinggal sementara di daerah Moab."
+    },
+    {
+      "bookId": "RUT",
+      "chapter": 2,
+      "verse": 12,
+      "text": "Kiranya TUHAN membalas perbuatanmu dan upah sepenuhnya akan diberikan kepadamu oleh TUHAN, Allah Israel, yang di bawah sayap-Nya kamu telah datang berlindung.”"
+    },
+    {
+      "bookId": "RUT",
+      "chapter": 4,
+      "verse": 22,
+      "text": "Obed memperanakkan Isai. Isai memperanakkan Daud."
+    },
+    {
+      "bookId": "1SA",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Ada seorang laki-laki dari Ramataim-Zofim, Pegunungan Efraim, bernama Elkana, anak Yeroham, anak Elihu, anak Tohu, anak Zuf, seorang Efraim."
+    },
+    {
+      "bookId": "1SA",
+      "chapter": 16,
+      "verse": 12,
+      "text": "Lalu, Isai menyuruh orang untuk menjemput dia. Dia itu kemerah-merahan, matanya indah, dan wajahnya tampan. TUHAN berfirman, “Bangkitlah, dan urapilah dia, sebab inilah dia.”"
+    },
+    {
+      "bookId": "1SA",
+      "chapter": 31,
+      "verse": 13,
+      "text": "Mereka mengambil tulang-tulangnya dan menguburkannya di bawah pohon tamariska di Yabesh, lalu mereka berpuasa selama tujuh hari."
+    },
+    {
+      "bookId": "2SA",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Sesudah Saul mati, dan ketika Daud kembali dari mengalahkan orang Amalek, dia tinggal di Ziklag selama dua hari."
+    },
+    {
+      "bookId": "2SA",
+      "chapter": 12,
+      "verse": 16,
+      "text": "Kemudian, Daud memohon kepada Allah untuk anak itu. Daud berpuasa dengan tekun dan masuk ke dalam, lalu berbaring di tanah semalam-malaman."
+    },
+    {
+      "bookId": "2SA",
+      "chapter": 24,
+      "verse": 25,
+      "text": "Lalu, Daud mendirikan mazbah bagi TUHAN di sana untuk mempersembahkan kurban bakaran dan kurban pendamaian. Lalu, TUHAN mengabulkan doanya untuk negeri itu sehingga bencana yang menimpa orang Israel berhenti."
+    },
+    {
+      "bookId": "1KI",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Raja Daud pun sudah tua dan lanjut umurnya. Meskipun mereka menutupinya dengan selimut, dia tidak merasa hangat."
+    },
+    {
+      "bookId": "1KI",
+      "chapter": 11,
+      "verse": 22,
+      "text": "Namun, Firaun bertanya kepadanya, “Apakah besertaku kamu kekurangan dan lihatlah, kamu berniat pergi ke tanahmu?” Lalu, dia menjawab, “Tidak, tetapi engkau harus mengutusku pergi.”"
+    },
+    {
+      "bookId": "1KI",
+      "chapter": 22,
+      "verse": 53,
+      "text": "Sebab dia beribadah kepada Baal dan sujud menyembahnya sehingga membangkitkan murka TUHAN, Allah Israel, seperti segala yang telah diperbuat oleh ayahnya."
+    },
+    {
+      "bookId": "2KI",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Moab memberontak terhadap Israel sesudah Ahab mati."
+    },
+    {
+      "bookId": "2KI",
+      "chapter": 13,
+      "verse": 13,
+      "text": "Lalu, Yoas dibaringkan beserta nenek moyangnya sehingga Yerobeam duduk di takhtanya. Kemudian, Yoas dikuburkan di Samaria, di dekat raja-raja Israel."
+    },
+    {
+      "bookId": "2KI",
+      "chapter": 25,
+      "verse": 30,
+      "text": "Dan untuk tunjangannya, tunjangan rutin diberikan kepadanya dari raja Babel sesuai kebutuhannya sehari-hari seumur hidupnya."
+    },
+    {
+      "bookId": "1CH",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Adam, Set, Enos,"
+    },
+    {
+      "bookId": "1CH",
+      "chapter": 15,
+      "verse": 15,
+      "text": "Keturunan Lewi mengangkat tabut Allah itu di atas bahu mereka dengan tongkat pengusung, sebagaimana Musa memerintahkannya, sesuai dengan firman TUHAN."
+    },
+    {
+      "bookId": "1CH",
+      "chapter": 29,
+      "verse": 30,
+      "text": "Termasuk seluruh pemerintahannya, kepahlawanannya, dan masa-masa yang dia alami, yang Israel alami, dan yang kerajaan-kerajaan dari negeri lain alami."
+    },
+    {
+      "bookId": "2CH",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Salomo, anak Daud, memperkuat kedudukannya atas kerajaannya. TUHAN, Allahnya, menyertai dia dan menjadikannya sangat besar."
+    },
+    {
+      "bookId": "2CH",
+      "chapter": 18,
+      "verse": 17,
+      "text": "Raja Israel berkata kepada Yosafat, “Bukankah telah kukatakan kepadamu bahwa dia tidak pernah menubuatkan hal yang baik tentang aku, kecuali hanya malapetaka?”"
+    },
+    {
+      "bookId": "2CH",
+      "chapter": 36,
+      "verse": 23,
+      "text": "“Inilah titah Koresh, raja Persia: TUHAN, Allah semesta langit, telah memberikan kepadaku semua kerajaan di bumi. Dan, Dia telah menunjuk aku untuk mendirikan rumah bagi-Nya di Yerusalem, yang terletak di Yehuda. Siapa pun di antara kamu semua yang merupakan umat-Nya, kiranya TUHAN, Allahnya, menyertainya, dan biarlah dia pergi.”"
+    },
+    {
+      "bookId": "EZR",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Pada tahun pertama zaman Koresh, raja Persia, untuk menggenapi firman TUHAN yang disampaikan melalui mulut Yeremia, TUHAN menggerakkan hati Koresh, raja Persia itu, sehingga dia membuat pengumuman di seluruh kerajaannya dan membuatnya pula dalam bentuk tulisan, yang berbunyi:"
+    },
+    {
+      "bookId": "EZR",
+      "chapter": 5,
+      "verse": 9,
+      "text": "Kami bertanya kepada para tua-tua itu dan berkata, ‘Siapa yang memerintahkan kamu untuk membangun kembali bait ini dan menyelesaikan tembok ini?’"
+    },
+    {
+      "bookId": "EZR",
+      "chapter": 10,
+      "verse": 44,
+      "text": "Mereka semua telah kawin dengan perempuan-perempuan asing, dan sebagian dari istri mereka telah memberikan anak kepada mereka."
+    },
+    {
+      "bookId": "NEH",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Inilah perkataan Nehemia, anak Hakhalya. Pada bulan Kislew, pada tahun kedua puluh, ketika aku berada di Puri Susan,"
+    },
+    {
+      "bookId": "NEH",
+      "chapter": 7,
+      "verse": 37,
+      "text": "keturunan Lod, Hadid, dan Ono, 721;"
+    },
+    {
+      "bookId": "NEH",
+      "chapter": 13,
+      "verse": 31,
+      "text": "Aku juga membuat persediaan untuk membawa persembahan kayu dan buah-buahan hasil pertama pada waktu-waktu tertentu. Ya Allahku, ingatlah aku untuk selamanya."
+    },
+    {
+      "bookId": "EST",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Pada zaman Ahasyweros, yaitu Ahasyweros yang memerintah lebih dari 127 provinsi dari India sampai ke Kush."
+    },
+    {
+      "bookId": "EST",
+      "chapter": 5,
+      "verse": 7,
+      "text": "Ester menjawab, “Permintaan dan permohonanku adalah,"
+    },
+    {
+      "bookId": "EST",
+      "chapter": 10,
+      "verse": 3,
+      "text": "Sebab, Mordekhai, orang Yahudi itu, adalah orang kedua di bawah Raja Ahasyweros dan termasyhur di antara orang-orang Yahudi dan disenangi oleh banyak saudara laki-lakinya. Dia mencari yang baik untuk bangsanya dan membicarakan damai sejahtera untuk seluruh keturunannya."
+    },
+    {
+      "bookId": "JOB",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Ada seorang laki-laki di negeri Us yang bernama Ayub. Orang itu saleh dan benar, seorang yang takut akan Allah, dan menjauhkan diri dari kejahatan."
+    },
+    {
+      "bookId": "JOB",
+      "chapter": 21,
+      "verse": 17,
+      "text": "Berapa sering lampu orang fasik dipadamkan? Berapa sering malapetaka datang atas mereka? Berapa sering Allah mendatangkan kesusahan dalam kemarahan-Nya?"
+    },
+    {
+      "bookId": "JOB",
+      "chapter": 42,
+      "verse": 17,
+      "text": "Kemudian, Ayub mati karena tua dan lanjut umurnya."
+    },
+    {
+      "bookId": "PSA",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Diberkatilah orang yang tidak berjalan menurut nasihat orang fasik, tidak berdiri di jalan orang-orang berdosa, dan tidak duduk di pertemuan para pencemooh."
+    },
+    {
+      "bookId": "PSA",
+      "chapter": 75,
+      "verse": 5,
+      "text": "(75-6) jangan angkat tandukmu tinggi-tinggi; jangan berbicara dengan leher yang bersitegang.’”"
+    },
+    {
+      "bookId": "PSA",
+      "chapter": 150,
+      "verse": 6,
+      "text": "Biarlah segala yang bernapas memuji TUHAN! Haleluya!"
+    },
+    {
+      "bookId": "PRO",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Amsal-amsal Salomo, anak Daud, raja Israel,"
+    },
+    {
+      "bookId": "PRO",
+      "chapter": 16,
+      "verse": 17,
+      "text": "Jalan orang jujur menghindari kejahatan. Mereka yang mengawasi jalannya memelihara jiwanya."
+    },
+    {
+      "bookId": "PRO",
+      "chapter": 31,
+      "verse": 31,
+      "text": "Berikan kepadanya hasil tangannya; biarkan pekerjaannya sendiri memujinya di pintu-pintu gerbang."
+    },
+    {
+      "bookId": "ECC",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Kata-kata Pengkhotbah, anak Daud, raja di Yerusalem."
+    },
+    {
+      "bookId": "ECC",
+      "chapter": 6,
+      "verse": 6,
+      "text": "Walaupun dia hidup dua kali seribu tahun, tetapi tidak memandang kebaikan, bukankah semuanya menuju ke satu tempat?"
+    },
+    {
+      "bookId": "ECC",
+      "chapter": 12,
+      "verse": 14,
+      "text": "Sebab, Allah akan membawa setiap perbuatan ke pengadilan, termasuk segala sesuatu yang tersembunyi, entah itu baik atau jahat."
+    },
+    {
+      "bookId": "SNG",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Nyanyian di atas segala nyanyian dari Salomo."
+    },
+    {
+      "bookId": "SNG",
+      "chapter": 4,
+      "verse": 8,
+      "text": "Datanglah bersamaku dari Lebanon, pengantin perempuanku, bersamaku dari Lebanon. Pandanglah dari Puncak Amana, dari Puncak Senir dan Hermon, dari sarang-sarang singa, dan dari bukit-bukit macan tutul."
+    },
+    {
+      "bookId": "SNG",
+      "chapter": 8,
+      "verse": 14,
+      "text": "Cepatlah, hai kekasihku, dan jadilah seperti seekor kijang, atau anak rusa jantan, di atas pegunungan rempah-rempah."
+    },
+    {
+      "bookId": "ISA",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Penglihatan Yesaya, anak Amos, yang dia lihat tentang Yehuda dan Yerusalem pada masa Uzia, Yotam, Ahas, dan Hizkia, raja-raja Yehuda."
+    },
+    {
+      "bookId": "ISA",
+      "chapter": 33,
+      "verse": 12,
+      "text": "Bangsa-bangsa akan dibakar menjadi kapur, seperti duri yang dipotong, kemudian dibakar dalam nyala api."
+    },
+    {
+      "bookId": "ISA",
+      "chapter": 66,
+      "verse": 24,
+      "text": "“Mereka akan keluar dan melihat mayat orang-orang yang telah memberontak melawan Aku, karena ulat-ulat mereka tidak akan mati, dan apinya tidak akan padam, dan mereka akan menjadi kejijikan bagi semua manusia.”"
+    },
+    {
+      "bookId": "JER",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Inilah perkataan Yeremia, anak Hilkia, salah satu imam di Anatot, di tanah Benyamin,"
+    },
+    {
+      "bookId": "JER",
+      "chapter": 26,
+      "verse": 12,
+      "text": "Kemudian, Yeremia berkata kepada semua pejabat dan kepada semua orang, katanya, “TUHAN mengutusku untuk bernubuat menentang rumah ini dan kota ini, semua perkataan yang telah kamu dengar."
+    },
+    {
+      "bookId": "JER",
+      "chapter": 52,
+      "verse": 34,
+      "text": "Dan untuk tunjangannya, tunjangan rutin diberikan kepadanya dari Raja Babel sesuai kebutuhannya sehari-hari seumur hidupnya, sampai hari kematiannya."
+    },
+    {
+      "bookId": "LAM",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Betapa ia tinggal dalam keterasingan, yaitu kota yang dahulu penuh dengan orang-orang itu! Ia yang dahulu sangat besar di antara bangsa-bangsa telah menjadi seperti seorang janda! Putri di antara provinsi-provinsi telah menjadi seorang budak."
+    },
+    {
+      "bookId": "LAM",
+      "chapter": 3,
+      "verse": 33,
+      "text": "Sebab, tidak dengan senang hati Dia menindas atau mendukakan anak-anak manusia."
+    },
+    {
+      "bookId": "LAM",
+      "chapter": 5,
+      "verse": 22,
+      "text": "kecuali Engkau benar-benar telah menolak kami, dan sangat marah terhadap kami."
+    },
+    {
+      "bookId": "EZK",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Pada tahun ketiga puluh, pada bulan keempat, hari kelima bulan itu, ketika aku ada di antara orang-orang buangan di dekat Sungai Kebar, langit terbuka dan aku mendapat penglihatan dari Allah."
+    },
+    {
+      "bookId": "EZK",
+      "chapter": 24,
+      "verse": 14,
+      "text": "“Aku, TUHAN, telah mengatakannya: hal itu akan terjadi dan Aku akan melakukannya. Aku tidak akan berbalik, maupun berbelaskasihan, dan Aku tidak akan menyesalinya; sesuai dengan jalan-jalanmu dan sesuai dengan perbuatan-perbuatanmu, kamu akan dihakimi,” firman Tuhan ALLAH."
+    },
+    {
+      "bookId": "EZK",
+      "chapter": 48,
+      "verse": 35,
+      "text": "“Panjangnya sekeliling kota sembilan ribu meter. Mulai dari sekarang, nama kota itu adalah ‘TUHAN ADA DI SANA.’”"
+    },
+    {
+      "bookId": "DAN",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Pada tahun ketiga pemerintahan Yoyakim, raja Yehuda, Nebukadnezar, raja Babel, datang ke Yerusalem dan mengepungnya."
+    },
+    {
+      "bookId": "DAN",
+      "chapter": 6,
+      "verse": 14,
+      "text": "(6-15) Setelah raja mendengar hal itu, dia sangat sedih dan mencari jalan untuk melepaskan Daniel. Hingga matahari terbenam, dia masih berupaya untuk melepaskannya."
+    },
+    {
+      "bookId": "DAN",
+      "chapter": 12,
+      "verse": 13,
+      "text": "“Akan tetapi, kamu, Daniel, pergilah sampai kesudahan tiba. Kamu akan beristirahat dan akan bangkit untuk mendapat bagianmu pada akhir zaman.”"
+    },
+    {
+      "bookId": "HOS",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Firman TUHAN datang kepada Hosea, anak Beeri, pada zaman pemerintahan Uzia, Yotam, Ahas, dan Hizkia, raja-raja Yehuda, dan pada zaman pemerintahan Yerobeam, anak Yoas, raja Israel."
+    },
+    {
+      "bookId": "HOS",
+      "chapter": 7,
+      "verse": 8,
+      "text": "“Efraim berbaur dengan bangsa-bangsa, Efraim adalah roti yang bantat."
+    },
+    {
+      "bookId": "HOS",
+      "chapter": 14,
+      "verse": 9,
+      "text": "(14-10) Siapa yang bijaksana, biarlah dia memahami semuanya ini. Siapa yang berakal budi, biarlah dia mengetahuinya. Sebab, jalan-jalan TUHAN benar, dan orang benar berjalan di dalamnya, tetapi pemberontak akan tersandung di dalamnya."
+    },
+    {
+      "bookId": "JOL",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Firman TUHAN yang datang kepada Yoel anak Petuel:"
+    },
+    {
+      "bookId": "JOL",
+      "chapter": 2,
+      "verse": 16,
+      "text": "Kumpulkanlah bangsa ini, kuduskanlah jemaat, kumpulkanlah para tua-tua, kumpulkanlah anak-anak, bahkan anak-anak yang menyusu. Biarlah pengantin laki-laki keluar dari kamarnya, dan pengantin-pengantin perempuan dari kamar tidurnya."
+    },
+    {
+      "bookId": "JOL",
+      "chapter": 3,
+      "verse": 21,
+      "text": "Aku akan membalas darah mereka yang belum Kubalas, sebab TUHAN bersemayam di Sion.”"
+    },
+    {
+      "bookId": "AMO",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Perkataan dari Amos, salah seorang di antara para gembala dari Tekoa, yang dia lihat mengenai Israel pada masa pemerintahan Uzia, Raja Yehuda, dan pada masa pemerintahan Yerobeam, anak Yoas, Raja Israel, dua tahun sebelum gempa bumi."
+    },
+    {
+      "bookId": "AMO",
+      "chapter": 5,
+      "verse": 14,
+      "text": "Carilah yang baik, jangan yang jahat, supaya kamu hidup. TUHAN, Allah semesta alam, akan menyertaimu seperti yang sudah kamu katakan."
+    },
+    {
+      "bookId": "AMO",
+      "chapter": 9,
+      "verse": 15,
+      "text": "Aku akan menanam mereka di tanah mereka, dan mereka tidak akan lagi dicabut dari tanah yang telah Kuberikan kepada mereka,” kata firman TUHAN, Allahmu."
+    },
+    {
+      "bookId": "OBA",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Penglihatan Obaja. Inilah firman Tuhan ALLAH mengenai Edom: Kami telah mendengar kabar dari TUHAN, dan seorang utusan telah dikirim di antara bangsa-bangsa, katanya, “Bangkitlah, dan mari kita bangkit berperang melawannya!”"
+    },
+    {
+      "bookId": "OBA",
+      "chapter": 1,
+      "verse": 11,
+      "text": "Pada hari kamu berdiri di seberang, pada hari itu orang-orang tidak dikenal mengangkut kekayaannya, dan orang-orang asing melewati pintu gerbangnya, dan membuang undi atas Yerusalem, kamu adalah salah seorang dari mereka."
+    },
+    {
+      "bookId": "OBA",
+      "chapter": 1,
+      "verse": 21,
+      "text": "Penyelamat-penyelamat akan naik ke Gunung Sion, untuk menghakimi Pegunungan Esau, kerajaan akan menjadi milik TUHAN."
+    },
+    {
+      "bookId": "JON",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Firman TUHAN datang kepada Yunus, anak Amitai, demikian:"
+    },
+    {
+      "bookId": "JON",
+      "chapter": 2,
+      "verse": 5,
+      "text": "Air mengelilingi aku, bahkan mengancam nyawaku, lautan yang dalam mengelilingi aku, rumput laut melilit kepalaku."
+    },
+    {
+      "bookId": "JON",
+      "chapter": 4,
+      "verse": 11,
+      "text": "Tidakkah Aku seharusnya menyayangkan Niniwe, kota yang besar itu, yang berpenduduk lebih dari 120.000 orang, yang tidak dapat membedakan antara tangan kanan dan tangan kiri, yang juga ternaknya sangat banyak?”"
+    },
+    {
+      "bookId": "MIC",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Firman TUHAN yang datang kepada Mikha, orang Moresyet, pada zaman Yotam, Ahas, dan Hizkia, raja-raja Yehuda, yang ia lihat tentang Samaria dan Yerusalem."
+    },
+    {
+      "bookId": "MIC",
+      "chapter": 4,
+      "verse": 7,
+      "text": "“Aku akan menjadikan mereka yang pincang sebagai sisa-sisa bangsa, dan mereka yang terbuang menjadi bangsa yang kuat. TUHAN akan memerintah atas mereka di Gunung Sion, mulai sekarang sampai selama-lamanya.”"
+    },
+    {
+      "bookId": "MIC",
+      "chapter": 7,
+      "verse": 20,
+      "text": "“Engkau akan menunjukkan kesetiaan-Mu kepada Yakub dan belas kasih-Mu kepada Abraham, seperti yang telah Kaujanjikan dengan bersumpah kepada nenek moyang kami sejak zaman dahulu.”"
+    },
+    {
+      "bookId": "NAM",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Petaka Niniwe. Kitab penglihatan Nahum, orang Elkosh."
+    },
+    {
+      "bookId": "NAM",
+      "chapter": 2,
+      "verse": 7,
+      "text": "Dan, Huzab akan dipindahkan dan dibawa, dan dayang-dayangnya akan mengerang seperti suara burung merpati sambil memukul-mukul dadanya."
+    },
+    {
+      "bookId": "NAM",
+      "chapter": 3,
+      "verse": 19,
+      "text": "Tidak ada kesembuhan untuk lukamu, cederamu tidak tersembuhkan. Semua orang yang mendengar kabar tentangmu akan bertepuk tangan atas dirimu, sebab siapakah yang tidak tertimpa kejahatanmu yang terus-menerus itu?"
+    },
+    {
+      "bookId": "HAB",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Nubuat yang Nabi Habakuk lihat."
+    },
+    {
+      "bookId": "HAB",
+      "chapter": 2,
+      "verse": 10,
+      "text": "Kamu telah merancangkan malu atas keluargamu dengan menghabisi banyak suku bangsa, dengan demikian kamu telah berbuat dosa terhadap dirimu sendiri."
+    },
+    {
+      "bookId": "HAB",
+      "chapter": 3,
+      "verse": 19,
+      "text": "“TUHAN Allah adalah kekuatanku, dan Dia membuat kakiku seperti rusa, Dia membuatku berjalan pada tempat-tempat tinggi.” Untuk pemimpin pujian. Dengan permainan kecapi."
+    },
+    {
+      "bookId": "ZEP",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Firman TUHAN yang datang kepada Zefanya, anak Kusyi, anak Gedalya, anak Amarya, anak Hizkia, pada zaman Yosia, anak Amon, Raja Yehuda."
+    },
+    {
+      "bookId": "ZEP",
+      "chapter": 2,
+      "verse": 8,
+      "text": "“Aku telah mendengar celaan Moab dan cemoohan dari keturunan Amon, betapa mereka telah mencela umat-Ku dan meninggikan dirinya atas daerah umat-Ku.”"
+    },
+    {
+      "bookId": "ZEP",
+      "chapter": 3,
+      "verse": 20,
+      "text": "“Pada waktu itu, Aku akan membawa kamu pulang -- pada waktu aku mengumpulkanmu. sebab, Aku akan memberikan kemasyhuran dan pujian kepadamu di antara segala bangsa di bumi, ketika memulihkan keadaanmu di depan mata mereka,” firman TUHAN."
+    },
+    {
+      "bookId": "HAG",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Pada tahun kedua pemerintahan Raja Darius, pada bulan keenam, pada hari pertama bulan itu, firman TUHAN datang melalui Nabi Hagai kepada Zerubabel anak Sealtiel, gubernur Yehuda, dan kepada Yosua anak Yozadak, Imam Besar, yang berkata,"
+    },
+    {
+      "bookId": "HAG",
+      "chapter": 1,
+      "verse": 8,
+      "text": "Naiklah ke gunung, bawalah kayu, dan bangunlah Bait itu, maka Aku akan berkenan atasnya dan Aku akan dimuliakan,’ firman Tuhan."
+    },
+    {
+      "bookId": "HAG",
+      "chapter": 2,
+      "verse": 23,
+      "text": "‘Pada hari itu,’ firman TUHAN semesta alam, ‘Aku akan mengambil kamu, hai Zerubabel anak Sealtiel, hamba-Ku,’ firman TUHAN, ‘dan akan menempatkanmu seperti cincin meterai karena Aku telah memilih kamu,’ firman TUHAN semesta alam.”"
+    },
+    {
+      "bookId": "ZEC",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Pada bulan ke-8 dalam tahun ke-2 pemerintahan Darius, firman TUHAN datang kepada Nabi Zakharia, anak Berekhya, anak Ido, firman-Nya,"
+    },
+    {
+      "bookId": "ZEC",
+      "chapter": 7,
+      "verse": 7,
+      "text": "Bukankah ini firman yang telah TUHAN serukan melalui para nabi terdahulu ketika Yerusalem masih ditinggali dan masih makmur, bahkan kota-kota di sekelilingnya, dan Tanah Negeb dan daerah bukit masih ditinggali?”"
+    },
+    {
+      "bookId": "ZEC",
+      "chapter": 14,
+      "verse": 21,
+      "text": "Semua kuali di Yerusalem dan di Yehuda akan menjadi kudus bagi TUHAN semesta alam, dan semua orang yang mempersembahkan kurban akan datang mengambilnya dan memasak di dalamnya. Pada waktu itu, tidak akan ada lagi pedagang di dalam Bait TUHAN semesta alam."
+    },
+    {
+      "bookId": "MAL",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Inilah nubuat firman TUHAN kepada Israel melalui Maleakhi."
+    },
+    {
+      "bookId": "MAL",
+      "chapter": 2,
+      "verse": 9,
+      "text": "“Karena itu, Aku juga akan membuat kamu dihina dan direndahkan di hadapan seluruh bangsa ini karena kamu tidak memelihara jalan-jalan-Ku, tetapi pandang bulu dalam hal hukum.”"
+    },
+    {
+      "bookId": "MAL",
+      "chapter": 4,
+      "verse": 6,
+      "text": "Lalu, dia akan mengembalikan hati ayah kepada anak-anaknya dan hati anak-anak kepada ayahnya supaya Aku tidak akan datang dan membinasakan bumi dengan kutukan.”"
+    },
+    {
+      "bookId": "MAT",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Kitab silsilah Yesus Kristus, anak Daud, anak Abraham."
+    },
+    {
+      "bookId": "MAT",
+      "chapter": 14,
+      "verse": 18,
+      "text": "Dan, Dia berkata, “Bawalah itu kemari, kepada-Ku.”"
+    },
+    {
+      "bookId": "MAT",
+      "chapter": 28,
+      "verse": 20,
+      "text": "ajarkanlah mereka untuk menaati semua yang Aku perintahkan kepadamu; dan lihat, Aku selalu bersamamu, bahkan sampai kepada akhir zaman.”"
+    },
+    {
+      "bookId": "MRK",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Inilah permulaan Injil Yesus Kristus, Anak Allah,"
+    },
+    {
+      "bookId": "MRK",
+      "chapter": 8,
+      "verse": 19,
+      "text": "ketika Aku memecah-mecah lima roti untuk lima ribu orang, berapa banyak keranjang yang penuh dengan potongan sisa roti yang kamu kumpulkan?” Mereka menjawab, “Dua belas.”"
+    },
+    {
+      "bookId": "MRK",
+      "chapter": 16,
+      "verse": 20,
+      "text": "Mereka pergi dan memberitakan firman ke mana-mana, sementara Tuhan bekerja bersama mereka dan meneguhkan firman-Nya melalui tanda-tanda yang menyertainya."
+    },
+    {
+      "bookId": "LUK",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Sudah ada banyak orang berusaha menyusun sebuah catatan tentang peristiwa-peristiwa yang telah terjadi di tengah-tengah kita,"
+    },
+    {
+      "bookId": "LUK",
+      "chapter": 12,
+      "verse": 30,
+      "text": "Sebab, bangsa-bangsa di dunia mencari itu semua, tetapi Bapamu mengetahui bahwa kamu memerlukannya."
+    },
+    {
+      "bookId": "LUK",
+      "chapter": 24,
+      "verse": 53,
+      "text": "Mereka selalu berada di dalam Bait Allah dan memuji Allah."
+    },
+    {
+      "bookId": "JHN",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Pada mulanya adalah Firman, Firman itu bersama-sama dengan Allah dan Firman itu adalah Allah."
+    },
+    {
+      "bookId": "JHN",
+      "chapter": 11,
+      "verse": 29,
+      "text": "Mendengar hal itu, Maria segera berdiri dan menemui Yesus."
+    },
+    {
+      "bookId": "JHN",
+      "chapter": 21,
+      "verse": 25,
+      "text": "Masih ada banyak hal lain lagi yang telah Yesus lakukan, yang jika dituliskan satu per satu, aku rasa seluruh dunia ini pun tidak akan cukup untuk semua kitab yang harus ditulis itu."
+    },
+    {
+      "bookId": "ACT",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Dalam buku yang aku tulis sebelumnya, Teofilus, tentang semua yang Yesus mulai lakukan dan ajarkan,"
+    },
+    {
+      "bookId": "ACT",
+      "chapter": 14,
+      "verse": 14,
+      "text": "Akan tetapi, ketika rasul Barnabas dan rasul Paulus mendengar hal itu, mereka merobek pakaian mereka dan berlari masuk ke tengah-tengah orang banyak itu, sambil berseru,"
+    },
+    {
+      "bookId": "ACT",
+      "chapter": 28,
+      "verse": 31,
+      "text": "sambil memberitakan Kerajaan Allah dan mengajar tentang Tuhan Yesus Kristus dengan penuh keberanian dan tanpa rintangan apa pun."
+    },
+    {
+      "bookId": "ROM",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Paulus, hamba Yesus Kristus, yang dipanggil menjadi rasul dan dikhususkan bagi Injil Allah;"
+    },
+    {
+      "bookId": "ROM",
+      "chapter": 8,
+      "verse": 20,
+      "text": "Sebab, semua ciptaan menjadi sasaran kesia-siaan, bukan karena diingininya, tetapi karena Dia yang menaklukkannya, dengan pengharapan,"
+    },
+    {
+      "bookId": "ROM",
+      "chapter": 16,
+      "verse": 27,
+      "text": "kepada satu-satunya Allah yang penuh hikmat melalui Kristus Yesus, yang menerima kemuliaan sampai selama-lamanya! Amin."
+    },
+    {
+      "bookId": "1CO",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Paulus, dipanggil sebagai rasul Yesus Kristus oleh kehendak Allah, dan Sostenes, saudara kita."
+    },
+    {
+      "bookId": "1CO",
+      "chapter": 8,
+      "verse": 7,
+      "text": "Meskipun demikian, tidak semua manusia memiliki pengetahuan ini. Namun, beberapa orang, yang sudah terbiasa dengan berhala sampai sekarang, memakan makanan itu sebagai makanan yang dipersembahkan kepada berhala. Karena itu, hati nurani mereka yang lemah menjadi tercemar."
+    },
+    {
+      "bookId": "1CO",
+      "chapter": 16,
+      "verse": 24,
+      "text": "Kasihku menyertai kamu semua dalam Yesus Kristus. Amin."
+    },
+    {
+      "bookId": "2CO",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Paulus, seorang rasul Kristus Yesus oleh kehendak Allah dan Timotius, saudara kita, kepada jemaat Allah yang ada di Korintus bersama semua orang kudus yang ada di seluruh Akhaya."
+    },
+    {
+      "bookId": "2CO",
+      "chapter": 7,
+      "verse": 8,
+      "text": "Jadi, meskipun aku telah membuatmu sedih karena suratku itu, aku tidak menyesalinya. Kalaupun aku pernah menyesalinya, itu karena aku melihat bahwa surat itu menyedihkan hatimu walaupun hanya sesaat."
+    },
+    {
+      "bookId": "2CO",
+      "chapter": 13,
+      "verse": 14,
+      "text": "(13-13) Anugerah Tuhan Yesus Kristus, dan kasih Allah dan persekutuan dari Roh Kudus menyertai kamu semua."
+    },
+    {
+      "bookId": "GAL",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Dari Paulus, yang menjadi rasul bukan karena manusia atau melalui manusia, melainkan melalui Kristus Yesus dan Allah Bapa yang membangkitkan Dia dari antara orang mati."
+    },
+    {
+      "bookId": "GAL",
+      "chapter": 3,
+      "verse": 15,
+      "text": "Saudara-saudara, aku akan memberi contoh dari kehidupan sehari-hari: Kalau perjanjian telah disahkan, walaupun hanya kontrak antarmanusia, tidak ada orang yang dapat membatalkan atau menambahkan apa pun dalam perjanjian itu."
+    },
+    {
+      "bookId": "GAL",
+      "chapter": 6,
+      "verse": 18,
+      "text": "Saudara-saudara, kiranya anugerah Tuhan Yesus Kristus ada bersama dengan rohmu. Amin."
+    },
+    {
+      "bookId": "EPH",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Dari Paulus, rasul Yesus Kristus oleh kehendak Allah. Kepada orang-orang kudus di Efesus, orang-orang beriman dalam Yesus Kristus."
+    },
+    {
+      "bookId": "EPH",
+      "chapter": 3,
+      "verse": 11,
+      "text": "Ini sesuai dengan rencana kekal yang dinyatakan dalam Yesus Kristus, Tuhan kita,"
+    },
+    {
+      "bookId": "EPH",
+      "chapter": 6,
+      "verse": 24,
+      "text": "Anugerah menyertai semua orang yang mengasihi Tuhan kita, Kristus Yesus, dengan kasih yang tidak akan binasa."
+    },
+    {
+      "bookId": "PHP",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Dari Paulus dan Timotius, hamba Yesus Kristus, kepada semua orang kudus dalam Kristus Yesus yang ada di Filipi dan kepada para penilik jemaat serta majelis jemaat:"
+    },
+    {
+      "bookId": "PHP",
+      "chapter": 2,
+      "verse": 15,
+      "text": "supaya kamu tidak bercacat dan tidak bersalah, sebagai anak-anak Allah yang tidak tercela di tengah-tengah generasi yang bengkok dan sesat ini, sehingga kamu bersinar di antara mereka sebagai terang di dunia."
+    },
+    {
+      "bookId": "PHP",
+      "chapter": 4,
+      "verse": 23,
+      "text": "Anugerah dari Tuhan Yesus Kristus menyertai rohmu. Amin."
+    },
+    {
+      "bookId": "COL",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Dari Paulus, yang menjadi rasul Yesus Kristus oleh kehendak Allah, dan dari Timotius saudara seiman kita."
+    },
+    {
+      "bookId": "COL",
+      "chapter": 2,
+      "verse": 12,
+      "text": "Dalam baptisan, kamu dikuburkan bersama dengan Kristus, dan juga dibangkitkan bersama-sama dengan Dia melalui imanmu dalam kuasa Allah yang membangkitkan Dia dari antara orang mati."
+    },
+    {
+      "bookId": "COL",
+      "chapter": 4,
+      "verse": 18,
+      "text": "Aku, Paulus, menulis salam ini dengan tanganku sendiri. Ingatlah belengguku. Anugerah Allah menyertai kamu."
+    },
+    {
+      "bookId": "1TH",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Dari Paulus, Silwanus, dan Timotius kepada jemaat di Tesalonika, yang ada dalam Allah Bapa dan dalam Tuhan Yesus Kristus. Anugerah dan damai menyertai kamu."
+    },
+    {
+      "bookId": "1TH",
+      "chapter": 3,
+      "verse": 7,
+      "text": "Karena itu, Saudara-saudara, dalam semua kesusahan dan penderitaan ini, kami terhibur olehmu melalui imanmu."
+    },
+    {
+      "bookId": "1TH",
+      "chapter": 5,
+      "verse": 28,
+      "text": "Anugerah Tuhan kita, Kristus Yesus, menyertaimu."
+    },
+    {
+      "bookId": "2TH",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Salam dari Paulus, Silwanus, dan Timotius, kepada jemaat di Tesalonika dalam Allah, Bapa kita, dan Tuhan Yesus Kristus."
+    },
+    {
+      "bookId": "2TH",
+      "chapter": 2,
+      "verse": 9,
+      "text": "Kedatangan si manusia jahat itu akan selaras dengan pekerjaan Iblis, disertai dengan segala macam kuasa, tanda-tanda ajaib, dan mukjizat-mukjizat palsu;"
+    },
+    {
+      "bookId": "2TH",
+      "chapter": 3,
+      "verse": 18,
+      "text": "Anugerah dari Tuhan kita, Yesus Kristus, menyertai kamu semua."
+    },
+    {
+      "bookId": "1TI",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Dari Paulus, yang menjadi rasul Yesus Kristus karena perintah Allah, Juru Selamat kita, dan Yesus Kristus, pengharapan kita."
+    },
+    {
+      "bookId": "1TI",
+      "chapter": 3,
+      "verse": 8,
+      "text": "Demikian juga diaken, ia haruslah seorang yang dihormati, tidak bercabang lidah, tidak kecanduan minuman anggur, dan tidak mencari keuntungan yang tidak jujur."
+    },
+    {
+      "bookId": "1TI",
+      "chapter": 6,
+      "verse": 21,
+      "text": "yang dengan mengakuinya, iman beberapa orang menjadi menyimpang. Anugerah menyertai kamu."
+    },
+    {
+      "bookId": "2TI",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Dari Paulus, rasul Yesus Kristus yang dipilih oleh kehendak Allah sesuai dengan janji kehidupan yang ada dalam Yesus Kristus."
+    },
+    {
+      "bookId": "2TI",
+      "chapter": 2,
+      "verse": 13,
+      "text": "Jika kita tidak setia, Ia tetap setia, karena Ia tidak dapat menyangkal diri-Nya sendiri.”"
+    },
+    {
+      "bookId": "2TI",
+      "chapter": 4,
+      "verse": 22,
+      "text": "Tuhan menyertai rohmu. Anugerah menyertai kamu."
+    },
+    {
+      "bookId": "TIT",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Dari Paulus, hamba Allah dan rasul Kristus Yesus, yang diutus demi iman orang-orang pilihan Allah dan pengetahuan akan kebenaran yang memimpin kepada kesalehan"
+    },
+    {
+      "bookId": "TIT",
+      "chapter": 2,
+      "verse": 8,
+      "text": "perkataan benar yang tidak tercela sehingga para lawan akan menjadi malu karena tidak dapat mengatakan hal yang buruk tentang kita."
+    },
+    {
+      "bookId": "TIT",
+      "chapter": 3,
+      "verse": 15,
+      "text": "Semua orang yang ada bersamaku menyampaikan salam untukmu. Sampaikan salamku kepada mereka yang mengasihi kami dalam iman. Anugerah menyertai kamu semua."
+    },
+    {
+      "bookId": "PHM",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Salam dari Paulus, seorang yang dipenjara karena Yesus Kristus, dan dari Timotius, saudara seiman kita, kepada Filemon, sahabat dan rekan pelayan yang kami kasihi,"
+    },
+    {
+      "bookId": "PHM",
+      "chapter": 1,
+      "verse": 13,
+      "text": "yang sebenarnya ingin aku tahan untuk tinggal bersamaku supaya ia bisa menggantikanmu melayaniku selama aku dipenjarakan karena Injil."
+    },
+    {
+      "bookId": "PHM",
+      "chapter": 1,
+      "verse": 25,
+      "text": "Anugerah dari Tuhan kita, Yesus Kristus, kiranya menyertai rohmu."
+    },
+    {
+      "bookId": "HEB",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Setelah di masa yang lampau, Allah berulang kali berbicara kepada nenek moyang kita melalui para nabi,"
+    },
+    {
+      "bookId": "HEB",
+      "chapter": 7,
+      "verse": 14,
+      "text": "Sebab, sudah jelas bahwa Tuhan kita berasal dari suku Yehuda, suku yang tentangnya Musa tidak pernah mengatakan hal apa pun yang berkaitan dengan para imam."
+    },
+    {
+      "bookId": "HEB",
+      "chapter": 13,
+      "verse": 25,
+      "text": "Anugerah Allah menyertai kamu semua."
+    },
+    {
+      "bookId": "JAS",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Salam dari Yakobus, pelayan Allah dan Kristus Yesus, kepada kedua belas suku yang tersebar di seluruh dunia."
+    },
+    {
+      "bookId": "JAS",
+      "chapter": 3,
+      "verse": 9,
+      "text": "Dengan lidah, kita memberkati Tuhan dan Bapa kita, tetapi dengan itu juga, kita mengutuk orang yang diciptakan serupa dengan Allah."
+    },
+    {
+      "bookId": "JAS",
+      "chapter": 5,
+      "verse": 20,
+      "text": "ketahuilah bahwa orang yang membawa orang berdosa kembali ke jalan yang benar akan menyelamatkan jiwa orang itu dari kematian dan menutupi banyak dosa."
+    },
+    {
+      "bookId": "1PE",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Dari Petrus, seorang rasul Kristus Yesus, kepada orang-orang yang tinggal sebagai orang asing, yang tersebar di seluruh wilayah Pontus, Galatia, Kapadokia, Asia Kecil, dan Bitinia;"
+    },
+    {
+      "bookId": "1PE",
+      "chapter": 3,
+      "verse": 11,
+      "text": "Ia juga harus menjauhkan diri dari yang jahat dan melakukan yang baik. Hendaklah dia mencari perdamaian, dan berusaha mengejarnya."
+    },
+    {
+      "bookId": "1PE",
+      "chapter": 5,
+      "verse": 14,
+      "text": "Berilah salam seorang akan yang lain dengan ciuman kasih. Damai sejahtera menyertai kamu semua yang ada dalam Kristus. Amin."
+    },
+    {
+      "bookId": "2PE",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Dari Simon Petrus, hamba dan rasul Kristus Yesus, kepada mereka yang telah menerima iman yang sama dengan yang kami miliki melalui kebenaran Allah dan Juru Selamat kita, Kristus Yesus."
+    },
+    {
+      "bookId": "2PE",
+      "chapter": 2,
+      "verse": 11,
+      "text": "padahal para malaikat, yang meskipun jauh lebih kuat dan lebih berkuasa daripada mereka, tidak mengucapkan tuduhan yang mengandung hujatan terhadap mereka di hadapan Tuhan."
+    },
+    {
+      "bookId": "2PE",
+      "chapter": 3,
+      "verse": 18,
+      "text": "Namun, bertumbuhlah dalam anugerah dan pengenalan akan Tuhan dan Juru Selamat kita, Yesus Kristus. Bagi Dialah kemuliaan, sekarang dan sampai selama-lamanya! Amin."
+    },
+    {
+      "bookId": "1JN",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Sesuatu yang sudah ada sejak semula, yang sudah kami dengar, yang sudah kami lihat dengan mata kami, yang sudah kami perhatikan dan sentuh dengan tangan kami, yaitu Firman kehidupan,"
+    },
+    {
+      "bookId": "1JN",
+      "chapter": 3,
+      "verse": 12,
+      "text": "Jangan menjadi seperti Kain, yang berasal dari yang jahat dan yang membunuh adiknya. Dan, mengapa Kain membunuh adiknya? Sebab, perbuatan Kain jahat dan perbuatan adiknya benar."
+    },
+    {
+      "bookId": "1JN",
+      "chapter": 5,
+      "verse": 21,
+      "text": "Anak-anakku, jauhkanlah dirimu dari berhala-berhala."
+    },
+    {
+      "bookId": "2JN",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Dari penatua, kepada ibu yang dipilih dan kepada anak-anaknya, yang kukasihi dalam kebenaran, dan bukan aku saja, tetapi juga semua orang yang mengenal kebenaran,"
+    },
+    {
+      "bookId": "2JN",
+      "chapter": 1,
+      "verse": 7,
+      "text": "Sebab, banyak penyesat telah muncul ke dunia, mereka tidak mengakui Yesus sebagai Kristus yang datang dalam wujud manusia. Mereka adalah penyesat dan anti-Kristus."
+    },
+    {
+      "bookId": "2JN",
+      "chapter": 1,
+      "verse": 13,
+      "text": "Anak-anak dari saudaramu yang terpilih menyampaikan salam kepadamu."
+    },
+    {
+      "bookId": "3JN",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Dari penatua kepada Gayus terkasih, yang kukasihi dalam kebenaran."
+    },
+    {
+      "bookId": "3JN",
+      "chapter": 1,
+      "verse": 7,
+      "text": "Sebab, mereka telah pergi demi Nama itu, tanpa menerima apa pun dari orang-orang yang tidak percaya."
+    },
+    {
+      "bookId": "3JN",
+      "chapter": 1,
+      "verse": 14,
+      "text": "Aku berharap untuk menemuimu segera dan kita akan berbicara secara tatap muka. (1-15) Damai sejahtera bagimu. Kawan-kawan di sini mengirimkan salam untukmu. Sampaikan juga salam kami kepada setiap saudara di sana."
+    },
+    {
+      "bookId": "JUD",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Dari Yudas, pelayan Kristus Yesus dan saudara Yakobus, kepada mereka yang dipilih dan dikasihi Allah Bapa, serta yang dipelihara bagi Kristus Yesus."
+    },
+    {
+      "bookId": "JUD",
+      "chapter": 1,
+      "verse": 13,
+      "text": "Mereka seperti gelombang laut yang ganas, yang membuihkan kehinaan mereka sendiri. Mereka seperti bintang-bintang yang mengembara, yang baginya kegelapan yang pekat yang telah disediakan untuk selamanya."
+    },
+    {
+      "bookId": "JUD",
+      "chapter": 1,
+      "verse": 25,
+      "text": "Bagi satu-satunya Allah, Juru Selamat kita, melalui Kristus Yesus, Tuhan kita, kemuliaan, keagungan, kekuatan, dan kuasa sepanjang masa, dahulu, sekarang, sampai selama-lamanya. Amin."
+    },
+    {
+      "bookId": "REV",
+      "chapter": 1,
+      "verse": 1,
+      "text": "Penyataan dari Yesus Kristus, yang diberikan Allah kepada-Nya untuk ditunjukkan kepada hamba-hamba-Nya tentang hal-hal yang segera harus terjadi. Yesus Kristus memberikan penyataan ini melalui malaikat-Nya untuk disampaikan kepada Yohanes, hamba-Nya."
+    },
+    {
+      "bookId": "REV",
+      "chapter": 11,
+      "verse": 10,
+      "text": "Dan, yang tinggal di bumi akan bersukacita atas mereka dan bergembira; dan mereka saling mengirimkan hadiah satu sama lain karena kedua nabi ini menyiksa mereka yang tinggal di bumi."
+    },
+    {
+      "bookId": "REV",
+      "chapter": 22,
+      "verse": 21,
+      "text": "Anugerah Tuhan Yesus menyertai kamu semua. Amin."
+    }
+  ],
+  "bridgeMarkers": [
+    {
+      "bookId": "ISA",
+      "chapter": 22,
+      "verse": 10,
+      "text": "(22:9)"
+    },
+    {
+      "bookId": "ISA",
+      "chapter": 22,
+      "verse": 11,
+      "text": "(22:9)"
+    },
+    {
+      "bookId": "ISA",
+      "chapter": 22,
+      "verse": 18,
+      "text": "(22:17)"
+    }
+  ],
+  "bracketedNotes": [
+    {
+      "bookId": "MAT",
+      "chapter": 17,
+      "verse": 21,
+      "text": "[Akan tetapi, jenis ini hanya dapat diusir dengan doa dan puasa.”]"
+    },
+    {
+      "bookId": "MAT",
+      "chapter": 18,
+      "verse": 11,
+      "text": "[Sebab, Anak Manusia telah datang untuk menyelamatkan orang yang hilang.]"
+    },
+    {
+      "bookId": "LUK",
+      "chapter": 17,
+      "verse": 36,
+      "text": "[Begitu juga dua pekerja di ladang, yang seorang akan dibawa, sedangkan yang lain akan ditinggalkan.”]"
+    },
+    {
+      "bookId": "LUK",
+      "chapter": 23,
+      "verse": 17,
+      "text": "[Pada setiap hari raya Pesakh, Pilatus harus membebaskan seorang tahanan untuk orang banyak.]"
+    },
+    {
+      "bookId": "LUK",
+      "chapter": 23,
+      "verse": 19,
+      "text": "[Barabas adalah seorang yang dipenjara karena terlibat dalam pemberontakan di kota dan juga melakukan pembunuhan.]"
+    },
+    {
+      "bookId": "ACT",
+      "chapter": 8,
+      "verse": 37,
+      "text": "[Lalu, Filipus berkata, “Jika tuan percaya dengan sepenuh hati tuan, tuan boleh.” Lalu, ia menjawab dan berkata, “Aku percaya bahwa Kristus Yesus adalah Anak Allah.”]"
+    },
+    {
+      "bookId": "ACT",
+      "chapter": 15,
+      "verse": 34,
+      "text": "[Akan tetapi, dianggap baik bagi Silas untuk tetap tinggal di sana.]"
+    },
+    {
+      "bookId": "ACT",
+      "chapter": 28,
+      "verse": 29,
+      "text": "[Setelah Paulus menyampaikan perkataan-perkataan itu, orang-orang Yahudi pergi dengan banyak perbedaan pendapat di antara mereka.]"
+    }
+  ]
+}
