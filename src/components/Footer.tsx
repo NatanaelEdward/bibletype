@@ -7,12 +7,12 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ onOpenPassageSelector }) => {
   return (
-    <footer className="w-full max-w-5xl mx-auto px-4 py-6 border-t border-[#334155]/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#94A3B8]">
+    <footer className="w-full max-w-5xl mx-auto px-4 pt-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] border-t border-[#334155]/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#94A3B8]">
       {/* Passage controls */}
       <div className="flex items-center gap-3">
         <button
           onClick={onOpenPassageSelector}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#1E293B] border border-[#334155] text-[#94A3B8] hover:text-[#F1F5F9] hover:border-[#818CF8]/50 transition"
+          className="flex shrink-0 items-center gap-1.5 whitespace-nowrap px-3 py-1.5 rounded-lg bg-[#1E293B] border border-[#334155] text-[#94A3B8] hover:text-[#F1F5F9] hover:border-[#818CF8]/50 transition"
         >
           <BookOpen size={14} className="text-[#A78BFA]" />
           <span>Pilih Ayat</span>

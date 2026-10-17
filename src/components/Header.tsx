@@ -28,7 +28,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenSavedEntries,
 }) => {
   return (
-    <header className="w-full max-w-5xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-[#334155]/60">
+    <header className="w-full max-w-5xl mx-auto px-4 py-4 sm:py-6 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 border-b border-[#334155]/60">
       {/* Wordmark Logo */}
       <div className="flex items-center gap-3 select-none">
         <BibleTypingLogo badge size={22} />
@@ -46,7 +46,7 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             key={m.id}
             onClick={() => onModeChange(m.id)}
-            className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition ${
+            className={`whitespace-nowrap px-2.5 py-1.5 text-[11px] sm:px-3 sm:text-xs font-semibold rounded-lg transition ${
               mode === m.id
                 ? 'bg-[#A78BFA] text-[#0F172A] shadow-xs'
                 : 'text-[#94A3B8] hover:text-[#F1F5F9]'

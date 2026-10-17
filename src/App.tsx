@@ -566,7 +566,7 @@ export function App() {
         )}
 
         {/* Persistent Bible Reference Bar */}
-        <div className="w-full max-w-4xl bg-[#1E293B] border border-[#334155] rounded-2xl p-4 mb-4 select-none shadow-md">
+        <div className="w-full max-w-4xl bg-[#1E293B] border border-[#334155] rounded-2xl p-3 sm:p-4 mb-3 sm:mb-4 select-none shadow-md">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             {/* Current Reference & Status */}
             <div>
@@ -704,6 +704,9 @@ export function App() {
             fontSize={store.settings.fontSize}
             reducedMotion={store.settings.reducedMotion}
             smoothScroll={store.settings.smoothScroll}
+            autoFocus={
+              !showSettings && !showPassageSelector && !showProgress && !showSavedEntries && !completedStats
+            }
             liveStats={liveStats}
             onCharInput={handleCharInput}
             onBackspace={handleBackspace}

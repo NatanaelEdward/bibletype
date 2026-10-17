@@ -11,6 +11,8 @@ interface TypingAreaProps {
   fontSize: FontSize;
   reducedMotion: boolean;
   smoothScroll?: boolean;
+  /** Desktop-only convenience: focus the capture input when the verse changes. */
+  autoFocus?: boolean;
   liveStats: TypingStats;
   onCharInput: (char: string) => void;
   onBackspace: () => void;
@@ -35,6 +37,7 @@ export const TypingArea: React.FC<TypingAreaProps> = ({
   fontSize,
   reducedMotion,
   smoothScroll = true,
+  autoFocus = true,
   liveStats,
   onCharInput,
   onBackspace,
@@ -46,8 +49,13 @@ export const TypingArea: React.FC<TypingAreaProps> = ({
   const containerRef = useRef<HTMLDivElement | null>(null);
   const activeCharRef = useRef<HTMLSpanElement | null>(null);
   const [isFocused, setIsFocused] = useState(true);
+  // Characters already committed to the engine, used to diff the textarea value.
+  const typedValue = useMemo(() => typedHistory.map(h => h.char).join(''), [typedHistory]);
+  const typedValueRef = useRef(typedValue);
+  typedValueRef.current = typedValue;
 
-  // Keep hidden input focused
+  // Keep the capture input focused. Must run inside a user gesture so mobile
+  // browsers are allowed to raise the virtual keyboard.
   const focusInput = () => {
     if (inputRef.current) {
       inputRef.current.focus();
@@ -55,9 +63,18 @@ export const TypingArea: React.FC<TypingAreaProps> = ({
     }
   };
 
+  // Only pull focus automatically on pointer devices. On touch devices the
+  // browser opens the keyboard itself when the user taps, and stealing focus
+  // here would either be ignored or pop the keyboard while reading.
   useEffect(() => {
+    if (!autoFocus) return;
+    const isCoarsePointer =
+      typeof window !== 'undefined' &&
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(pointer: coarse)').matches;
+    if (isCoarsePointer) return;
     focusInput();
-  }, [targetText]);
+  }, [targetText, autoFocus]);
 
   // Scroll active character into the center of the viewport
   useEffect(() => {
@@ -81,6 +98,48 @@ export const TypingArea: React.FC<TypingAreaProps> = ({
     }
   }, [cursor, reducedMotion, smoothScroll]);
 
+  /**
+   * All character input comes from the textarea's value, not from keydown.
+   * Virtual keyboards commit text through input events (and report
+   * `Unidentified`/no keydown at all for predictive or composed input), so the
+   * value diff is the single source of truth for both desktop and mobile. It
+   * also means each character is processed exactly once.
+   */
+  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const nextValue = e.target.value;
+    const previousValue = typedValueRef.current;
+
+    if (nextValue === previousValue) return;
+
+    // The verse is finished: reject edits so the rendered text cannot drift
+    // away from the engine's completed state.
+    if (status === 'completed') {
+      e.target.value = previousValue;
+      return;
+    }
+
+    // Any input resumes a paused session, matching the desktop shortcut.
+    if (status === 'paused') onPauseToggle();
+
+    // Rewrite the change as "delete the divergent tail, then type the new one".
+    // Backspace, autocorrect, and paste all reduce to this form.
+    let common = 0;
+    const maxCommon = Math.min(previousValue.length, nextValue.length);
+    while (common < maxCommon && previousValue[common] === nextValue[common]) {
+      common += 1;
+    }
+
+    for (let i = previousValue.length; i > common; i -= 1) {
+      onBackspace();
+    }
+
+    Array.from(nextValue.slice(common)).forEach(char => {
+      // A verse is a single line; newlines can only come from Enter or paste.
+      if (char === '\n' || char === '\r') return;
+      onCharInput(char);
+    });
+  };
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     // Escape to toggle pause
     if (e.key === 'Escape') {
@@ -89,32 +148,24 @@ export const TypingArea: React.FC<TypingAreaProps> = ({
       return;
     }
 
-    // Tab + Enter or quick shortcuts
+    // Tab restarts the current verse
     if (e.key === 'Tab') {
       e.preventDefault();
       onRestart();
       return;
     }
 
-    if (status === 'paused') {
-      onPauseToggle(); // Any key resumes when paused
+    // Keep the single-line invariant; characters are handled by onChange.
+    if (e.key === 'Enter') {
+      e.preventDefault();
       return;
     }
 
-    if (e.key === 'Backspace') {
+    // Word deletion is a desktop convenience; plain Backspace flows through
+    // the input event so it keeps working on soft keyboards.
+    if (e.key === 'Backspace' && (e.ctrlKey || e.metaKey || e.altKey)) {
       e.preventDefault();
-      if (e.ctrlKey || e.metaKey || e.altKey) {
-        onBackspaceWord();
-      } else {
-        onBackspace();
-      }
-      return;
-    }
-
-    // Standard single character inputs
-    if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
-      e.preventDefault();
-      onCharInput(e.key);
+      onBackspaceWord();
     }
   };
 
@@ -144,14 +195,22 @@ export const TypingArea: React.FC<TypingAreaProps> = ({
       className="relative w-full max-w-4xl mx-auto my-auto flex flex-col items-center select-none"
       onClick={focusInput}
     >
-      {/* Hidden textarea to capture all keystrokes and IME */}
+      {/*
+        Capture input for the custom rendering. It stays inside the viewport
+        (offscreen inputs are unreliable for raising the mobile keyboard), is
+        focusable but invisible, and gets its value from the engine state.
+        text-base keeps iOS from zooming the page when it takes focus.
+      */}
       <textarea
         ref={inputRef}
         aria-label="Area mengetik teks Alkitab"
-        className="absolute -top-9999px left-0 opacity-0 pointer-events-none w-1 h-1 resize-none"
+        className="absolute left-0 top-0 z-10 h-10 w-10 resize-none overflow-hidden bg-transparent p-0 text-base opacity-0 pointer-events-none"
+        value={typedValue}
+        onChange={handleInputChange}
         onKeyDown={handleKeyDown}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
+        rows={1}
         autoCapitalize="off"
         autoComplete="off"
         autoCorrect="off"
@@ -165,14 +224,17 @@ export const TypingArea: React.FC<TypingAreaProps> = ({
           className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-[#0F172A]/80 backdrop-blur-xs rounded-xl cursor-pointer transition-opacity"
         >
           <div className="flex items-center gap-2 text-[#A78BFA] text-base font-medium px-4 py-2 rounded-lg bg-[#1E293B] border border-[#334155] shadow-lg">
-            <span>Klik atau tekan tombol apa saja untuk fokus</span>
+            <span>Ketuk atau tekan tombol apa saja untuk fokus</span>
           </div>
         </div>
       )}
 
       {/* Paused state overlay */}
       {status === 'paused' && (
-        <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-[#0F172A]/90 backdrop-blur-xs rounded-xl">
+        <div
+          onClick={onPauseToggle}
+          className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-[#0F172A]/90 backdrop-blur-xs rounded-xl cursor-pointer"
+        >
           <div className="text-center p-6 bg-[#1E293B] border border-[#334155] rounded-xl shadow-xl">
             <h3 className="text-xl font-bold text-[#F1F5F9] mb-2">Sesi Dijeda</h3>
             <p className="text-sm text-[#94A3B8] mb-4">
@@ -220,7 +282,7 @@ export const TypingArea: React.FC<TypingAreaProps> = ({
       {/* Windowed / Scrolling Typing Container with Complete-Word Wrapping */}
       <div
         ref={containerRef}
-        className={`w-full max-h-[360px] overflow-y-auto typing-scroll-container py-6 px-4 rounded-xl transition-all cursor-text ${fontSizeClasses[fontSize]}`}
+        className={`w-full max-h-[45dvh] md:max-h-[360px] overflow-y-auto overscroll-contain touch-manipulation typing-scroll-container py-6 px-4 rounded-xl transition-all cursor-text ${fontSizeClasses[fontSize]}`}
       >
         <p className="relative tracking-wide font-normal text-left select-none leading-relaxed">
           {wordTokens.map(token => {

@@ -104,6 +104,12 @@ npm run ayt:coverage  # write a per-book and per-chapter coverage report
 
 Third-party libraries, icons, and typefaces (React, Vite, Tailwind CSS, Lucide, Inter, JetBrains Mono, and others) remain the property of their authors and under their respective licences. The AYT text is covered only by the terms above. No licence file for this project's own source code is included in the repository.
 
+## Acknowledgments
+
+Bible Typing Indonesia was inspired by [Monkeytype](https://monkeytype.com/), a minimalist typing practice website. Its approach to focused typing practice influenced the design direction of this project.
+
+Monkeytype is an independent project. It is not the creator, owner, or sponsor of Bible Typing Indonesia, and no affiliation with or endorsement by Monkeytype is implied.
+
 ---
 
-Created by NatanaelE.
+Created by Natanael Edward Agung.
