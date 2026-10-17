@@ -1,70 +1,109 @@
 # Bible Typing Indonesia — Minimalist Scripture Typing
 
-A keyboard-first, distraction-free typing application inspired by Monkeytype, crafted for typing Holy Scripture in Indonesian using the authentic **Alkitab Yang Terbuka (AYT)** translation.
+Want to practice your typing while reading the Bible? Say no more. Bible Typing Indonesia is here for you.
 
-## ✨ Fitur Utama (Features)
+A focused, keyboard-first typing app for the Indonesian **Alkitab Yang Terbuka (AYT)** translation. All 66 books and 31,102 verses are bundled with the app and verified byte-for-byte against the published source.
 
-- **Tiga Mode Latihan (Three Practice Modes)**:
-  - **Ayat Pilihan (`single`)**: Pilih kitab, pasal, dan ayat apa saja, lalu mulai mengetik langsung dari ayat tersebut. Setelah ayat disimpan, aplikasi berpindah ke ayat berikutnya.
-  - **Per Kitab (`book`)**: Latihan berurutan ayat demi ayat dalam kitab yang dipilih dengan indikator progres akurat berdasarkan metadata kanonikal. Saat ayat terakhir kitab selesai, tampil dialog penyelesaian kitab untuk memilih kitab lain atau melanjutkan ke kitab kanonikal berikutnya.
-  - **Lanjutkan (`continuous`)**: Melanjutkan sesi dari posisi ayat terakhir yang tersimpan di penyimpanan lokal. Jika belum ada posisi tersimpan, disediakan pilihan untuk memulai dari Kejadian 1:1 atau memilih ayat.
-- **Word Wrapping Utuh (Complete Word Wrapping)**:
-  - Kata tidak akan terpotong di tengah huruf pada akhir baris. Seluruh kata dipindahkan ke baris berikutnya secara rapi dengan penjajaran caret dan sorotan kesalahan yang presisi.
-- **Evaluasi Tanpa Membedakan Huruf Besar/Kecil (Case-Insensitive Typing)**:
-  - Pengetikan huruf besar atau kecil dievaluasi sama tanpa penalti kesalahan kapitalisasi (misal: mengetik `k` untuk `K` dinilai benar). Teks ayat asli dan riwayat simpanan tetap mempertahankan huruf aslinya.
-- **Model Akurasi Sesi ala Monkeytype (Monkeytype Session Accuracy)**:
-  - Total keystroke dan kesalahan dihitung secara kumulatif selama sesi latihan. Menghapus dengan Backspace atau kata (`Ctrl + Backspace`) tidak menghapus riwayat kesalahan masa lalu. Akurasi tetap bertahan saat berpindah atau menyimpan ayat, dan hanya direset saat pengguna menekan tombol restart (`Tab` atau tombol ulang).
-- **Penanganan Teks Alkitab Asli (Authentic Scripture Handling)**:
-  - Teks AYT lengkap (66 kitab, 31.102 ayat) diverifikasi 100% byte-for-byte. Aplikasi tidak pernah membuat atau mengarang teks tiruan.
-- **Pengaturan & Personalisasi**:
-  - Ukuran huruf (`sm`, `md`, `lg`, `xl`)
-  - Gaya caret (`line`, `block`, `underline`)
-  - Efek suara ketikan mekanik (Web Audio API, luring tanpa aset eksternal)
-  - Dukungan pengurangan animasi (*reduced motion*)
-  - Reset progres dengan dialog konfirmasi aman
+## Features
 
-## ⌨️ Pintasan Papan Ketik (Keyboard Shortcuts)
+### Three practice modes
 
-| Pintasan | Aksi |
-|---|---|
-| `Tab` | Ulangi ayat / sesi aktif |
-| `Esc` | Jeda / Lanjutkan sesi |
-| `Ctrl + Backspace` | Hapus kata sebelumnya |
-| `Enter` | Lanjut ke ayat berikutnya (pada modal hasil) |
+- **Ayat Pilihan** — choose any book, chapter, and verse, then type it. Saving the verse moves you on to the next one.
+- **Per Kitab** — work through an entire book, verse by verse, with accurate progress for that book. A completion panel appears at the last verse so you can pick another book or continue to the next one in canon order.
+- **Lanjutkan** — resume from where you stopped. Your last saved position is restored from local storage; if nothing has been saved yet, you can start at Genesis 1:1 or choose a verse.
 
-## 📖 Cakupan Alkitab (Scripture Coverage)
+### Typing experience
 
-Aplikasi ini menggunakan terjemahan resmi Alkitab Yang Terbuka (AYT).
+- Character-by-character feedback with a caret that follows you through long chapters.
+- Text wraps by whole words, so a word is never split at the end of a line.
+- Punctuation equivalence — a straight `"` matches `“` and `”`, `'` matches `‘` and `’`, and `-` matches `—`.
+- Live gross WPM, net WPM, and accuracy, with running totals across multi-verse runs.
+- Monkeytype-style session accuracy: a mistake that is later corrected stays counted for the session.
+- Verse text is never generated, paraphrased, or padded. If a passage is not bundled, the app says so and blocks typing.
 
-| Terjemahan | Cakupan |
+### Settings
+
+Everything is adjusted from the Settings dialog:
+
+- **Lanjut Otomatis** — after a verse is completed, continue immediately or show a short results summary.
+- **Gaya Kursor** — line, block, or underline caret.
+- **Ukuran Huruf** — small, medium, large, or extra large text.
+- **Suara Ketikan** — mechanical key sounds generated with the Web Audio API (no audio files).
+- **Kurangi Motion** — reduce animations for a calmer session.
+- **Smooth Scroll** — smoother transitions when moving between verses.
+- **Abaikan Huruf Besar/Kecil** — ignore letter case while typing.
+- **Reset progres** — clear statistics and progress after a confirmation step.
+
+### Saved verses and progress
+
+- Every completed verse is saved locally with its reference, text, WPM, and accuracy.
+- The saved-verses panel supports search, editing a saved text, and jumping back to any verse.
+- Personal bests, the last 50 sessions, and per-passage completion counts are tracked in the progress panel.
+- An interrupted **Per Kitab** or **Lanjutkan** run can be resumed after a refresh.
+- Everything is stored in your browser. There is no account and no server.
+
+## Keyboard shortcuts
+
+| Key | Action |
 | --- | --- |
-| **AYT** (Alkitab Yang Terbuka) | Lengkap — seluruh 66 kitab, **31.102 ayat**, Kejadian 1:1 hingga Wahyu 22:21 |
+| `Tab` | Restart the current verse |
+| `Esc` | Pause or resume |
+| `Ctrl` + `Backspace` | Delete the previous word |
+| `Enter` | Continue to the next verse (results summary) |
 
-Dokumentasi asal-usul, checksum SHA-256, dan lisensi teks AYT tercatat di [`src/data/ayt/PROVENANCE.md`](src/data/ayt/PROVENANCE.md).
+## Scripture coverage
 
-## 📜 Lisensi & Atribusi (Licensing & Attribution)
+| Translation | Coverage |
+| --- | --- |
+| **AYT** (Alkitab Yang Terbuka) | Complete: all 66 books, 31,102 verses, Genesis 1:1 through Revelation 22:21 |
 
-- **Alkitab Yang Terbuka (AYT)**: © 2011–2024 Yayasan Lembaga SABDA (YLSA) / [ayt.co](https://ayt.co).
-  Digunakan secara **non-komersial** sesuai izin YLSA: *"AYT - usage (non-commercial) is CopyLefted, 2011 — this is to allow free usage/distribution of the text"*, dengan ketentuan turunan CC BY-NC-SA. Izin dikelola oleh YLSA (ylsa@sabda.org).
+Only the Indonesian AYT text is bundled, so the app does not show an English translation.
 
-## 🚀 Pengembangan & Pengujian (Development & Testing)
+Source provenance, the pinned upstream commit, the SHA-256 checksums, and the licensing terms are recorded in [`src/data/ayt/PROVENANCE.md`](src/data/ayt/PROVENANCE.md).
+
+## Tech stack
+
+- React 19 and TypeScript
+- Vite
+- Tailwind CSS v4
+- Lucide icons
+- Vitest and React Testing Library
+- LocalStorage for persistence, using a versioned schema
+- Web Audio API for key sounds
+
+## Getting started
+
+You will need Node.js and npm.
 
 ```bash
-# Menjalankan server pengembangan
+npm install
 npm run dev
+```
 
-# Menjalankan seluruh test suite otomatis
-npm test
+Then open the local URL printed by Vite.
 
-# Build produksi & pemeriksaan tipe TypeScript
-npm run build
+```bash
+npm test          # run the test suite
+npm run build     # type-check and build for production
 ```
 
 ### AYT data pipeline
 
+The bundled dataset can be rebuilt and checked from scratch:
+
 ```bash
-npm run ayt:fetch    # mengunduh artefak sumber AYT tersemat dan memverifikasi SHA-256
-npm run ayt:build    # validasi dan kompilasi ulang dataset indeks ayat
-npm run ayt:verify   # membandingkan seluruh 31.102 ayat byte-for-byte terhadap sumber asli
-npm run ayt:coverage # menghasilkan laporan coverage per kitab dan pasal
+npm run ayt:fetch     # download the pinned upstream artifact and verify its SHA-256
+npm run ayt:build     # validate and rebuild the verse-indexed dataset
+npm run ayt:verify    # compare all 31,102 shipped verses byte-for-byte with the source
+npm run ayt:coverage  # write a per-book and per-chapter coverage report
 ```
+
+## Licensing and attribution
+
+**Alkitab Yang Terbuka (AYT)** — © 2011–2024 Yayasan Lembaga SABDA (YLSA) / [ayt.co](https://ayt.co). The text is used non-commercially under YLSA's grant: *"AYT - usage (non-commercial) is CopyLefted, 2011 — this is to allow free usage/distribution of the text"*, with derivative works under CC BY-NC-SA. Permissions are managed by YLSA (ylsa@sabda.org). The notice is reproduced in the app footer and in the bundled data.
+
+Third-party libraries, icons, and typefaces (React, Vite, Tailwind CSS, Lucide, Inter, JetBrains Mono, and others) remain the property of their authors and under their respective licences. The AYT text is covered only by the terms above. No licence file for this project's own source code is included in the repository.
+
+---
+
+Created by NatanaelE.

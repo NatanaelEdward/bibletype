@@ -557,4 +557,26 @@ describe('Project Refinements: Bible Typing Indonesia', () => {
       expect(logoSvg).toHaveAttribute('viewBox', '0 0 32 32');
     });
   });
+
+  describe('8. Creator Attribution', () => {
+    it('shows the creator credit inside an accessible Tentang section in Settings', () => {
+      render(<App />);
+      fireEvent.click(screen.getByRole('button', { name: 'Pengaturan' }));
+
+      const about = screen.getByRole('region', { name: 'Tentang' });
+      expect(within(about).getByText('Bible Typing Indonesia')).toBeInTheDocument();
+      expect(within(about).getByText(/Minimalist Scripture Typing/)).toBeInTheDocument();
+      expect(
+        within(about).getByText(
+          'Bible Typing Indonesia adalah proyek independen yang dibuat untuk berlatih mengetik sambil membaca Alkitab.'
+        )
+      ).toBeInTheDocument();
+      expect(within(about).getByText(/Dibuat oleh/)).toHaveTextContent('Dibuat oleh NatanaelE');
+    });
+
+    it('keeps the creator name out of the header and typing screen', () => {
+      render(<App />);
+      expect(screen.queryByText('NatanaelE')).not.toBeInTheDocument();
+    });
+  });
 });

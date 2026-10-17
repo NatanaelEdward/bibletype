@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { UserSettings } from '../utils/storage';
-import { X, Volume2, VolumeX, AlertTriangle, ShieldCheck } from 'lucide-react';
+import { X, Volume2, VolumeX, AlertTriangle, ShieldCheck, Info } from 'lucide-react';
 
 interface SettingsModalProps {
   settings: UserSettings;
@@ -241,6 +241,30 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
               <strong>AYT:</strong> Alkitab Terjemahan Terbuka © Yayasan Lembaga SABDA (YLSA) / sabda.org. Digunakan di bawah lisensi CC BY-NC-SA untuk non-komersial.
             </p>
           </div>
+
+          {/* Tentang — creator attribution, deliberately understated */}
+          <section
+            aria-labelledby="settings-about-heading"
+            className="pt-3 border-t border-[#334155] text-[11px] text-[#94A3B8] space-y-1.5"
+          >
+            <h3
+              id="settings-about-heading"
+              className="flex items-center gap-1.5 text-[#F1F5F9] font-semibold"
+            >
+              <Info size={14} className="text-[#A78BFA]" aria-hidden="true" />
+              <span>Tentang</span>
+            </h3>
+            <p>
+              <strong className="text-[#F1F5F9] font-medium">Bible Typing Indonesia</strong>
+              <span className="text-[#64748B]"> — Minimalist Scripture Typing</span>
+            </p>
+            <p className="text-[#64748B]">
+              Bible Typing Indonesia adalah proyek independen yang dibuat untuk berlatih mengetik sambil membaca Alkitab.
+            </p>
+            <p className="text-[#64748B]">
+              Dibuat oleh <span className="text-[#94A3B8] font-medium">NatanaelE</span>
+            </p>
+          </section>
         </div>
       </div>
     </div>
