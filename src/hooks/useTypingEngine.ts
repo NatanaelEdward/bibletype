@@ -6,14 +6,16 @@ import { playKeySound } from '../utils/soundEffects';
 export interface UseTypingEngineProps {
   targetText: string;
   soundEnabled: boolean;
-  soundVolume: number;
+  soundVolume?: number;
+  ignoreCase?: boolean;
   onComplete?: (stats: ReturnType<typeof calculateStats>) => void;
 }
 
 export function useTypingEngine({
   targetText,
   soundEnabled,
-  soundVolume,
+  soundVolume = 0.2,
+  ignoreCase = false,
   onComplete,
 }: UseTypingEngineProps) {
   const [cursor, setCursor] = useState(0);
@@ -25,11 +27,18 @@ export function useTypingEngine({
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [totalErrors, setTotalErrors] = useState(0);
 
+  const [sessionTotalKeystrokes, setSessionTotalKeystrokes] = useState(0);
+  const [sessionCorrectKeystrokes, setSessionCorrectKeystrokes] = useState(0);
+  const [sessionErrorKeystrokes, setSessionErrorKeystrokes] = useState(0);
+
   // Synchronization refs for instant synchronous handling & rapid keystroke events
   const cursorRef = useRef(0);
   const typedHistoryRef = useRef<Array<{ char: string; targetChar: string; isCorrect: boolean; timestamp: number }>>([]);
   const statusRef = useRef<'idle' | 'typing' | 'paused' | 'completed'>('idle');
   const totalErrorsRef = useRef(0);
+  const sessionTotalKeystrokesRef = useRef(0);
+  const sessionCorrectKeystrokesRef = useRef(0);
+  const sessionErrorKeystrokesRef = useRef(0);
   const timerRef = useRef<number | null>(null);
   const onCompleteRef = useRef(onComplete);
   onCompleteRef.current = onComplete;
@@ -41,7 +50,8 @@ export function useTypingEngine({
     };
   }, []);
 
-  // Reset state when targetText changes
+  // Reset verse state when targetText changes (e.g. verse navigation or save).
+  // Historical session mistakes and keystrokes are intentionally preserved to match Monkeytype's model.
   useEffect(() => {
     cursorRef.current = 0;
     typedHistoryRef.current = [];
@@ -89,6 +99,8 @@ export function useTypingEngine({
     elapsedSeconds,
     currentIndex: cursor,
     targetLength: targetText.length,
+    sessionTotalKeystrokes,
+    sessionCorrectKeystrokes,
   });
 
   const handleCharInput = useCallback(
@@ -106,13 +118,22 @@ export function useTypingEngine({
       }
 
       const targetChar = targetText[currentCursor];
-      const isCorrect = isCharMatch(inputChar, targetChar);
+      const isCorrect = isCharMatch(inputChar, targetChar, ignoreCase);
 
       if (soundEnabled) {
         playKeySound(!isCorrect, soundVolume);
       }
 
-      if (!isCorrect) {
+      // Record typing attempt in session history (Monkeytype model)
+      sessionTotalKeystrokesRef.current += 1;
+      setSessionTotalKeystrokes(sessionTotalKeystrokesRef.current);
+
+      if (isCorrect) {
+        sessionCorrectKeystrokesRef.current += 1;
+        setSessionCorrectKeystrokes(sessionCorrectKeystrokesRef.current);
+      } else {
+        sessionErrorKeystrokesRef.current += 1;
+        setSessionErrorKeystrokes(sessionErrorKeystrokesRef.current);
         totalErrorsRef.current += 1;
         setTotalErrors(totalErrorsRef.current);
       }
@@ -150,6 +171,8 @@ export function useTypingEngine({
           elapsedSeconds: Math.max(0.5, elapsedSeconds),
           currentIndex: targetText.length,
           targetLength: targetText.length,
+          sessionTotalKeystrokes: sessionTotalKeystrokesRef.current,
+          sessionCorrectKeystrokes: sessionCorrectKeystrokesRef.current,
         });
 
         if (onCompleteRef.current) {
@@ -202,6 +225,9 @@ export function useTypingEngine({
     typedHistoryRef.current = [];
     statusRef.current = 'idle';
     totalErrorsRef.current = 0;
+    sessionTotalKeystrokesRef.current = 0;
+    sessionCorrectKeystrokesRef.current = 0;
+    sessionErrorKeystrokesRef.current = 0;
 
     setCursor(0);
     setTypedHistory([]);
@@ -209,6 +235,9 @@ export function useTypingEngine({
     setStartTime(null);
     setElapsedSeconds(0);
     setTotalErrors(0);
+    setSessionTotalKeystrokes(0);
+    setSessionCorrectKeystrokes(0);
+    setSessionErrorKeystrokes(0);
 
     if (timerRef.current) {
       clearInterval(timerRef.current);
@@ -237,6 +266,9 @@ export function useTypingEngine({
     startTime,
     elapsedSeconds,
     totalErrors,
+    sessionTotalKeystrokes,
+    sessionCorrectKeystrokes,
+    sessionErrorKeystrokes,
     liveStats,
     handleCharInput,
     handleBackspace,

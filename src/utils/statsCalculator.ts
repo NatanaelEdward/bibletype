@@ -30,6 +30,8 @@ export function calculateStats(params: {
   elapsedSeconds: number;
   currentIndex: number;
   targetLength: number;
+  sessionTotalKeystrokes?: number;
+  sessionCorrectKeystrokes?: number;
 }): TypingStats {
   const {
     totalCharsTyped,
@@ -39,6 +41,8 @@ export function calculateStats(params: {
     elapsedSeconds,
     currentIndex,
     targetLength,
+    sessionTotalKeystrokes,
+    sessionCorrectKeystrokes,
   } = params;
 
   const safeElapsedSeconds = Math.max(0, elapsedSeconds);
@@ -54,9 +58,13 @@ export function calculateStats(params: {
     netWpm = Math.max(0, Math.round(netWords / minutes));
   }
 
-  // Accuracy calculation
+  // Accuracy calculation: Monkeytype session accuracy model
+  // Tracks all historical key attempts throughout the session so corrected errors remain recorded.
   let accuracy = 100;
-  if (totalCharsTyped > 0) {
+  if (typeof sessionTotalKeystrokes === 'number' && sessionTotalKeystrokes > 0) {
+    const rawAccuracy = ((sessionCorrectKeystrokes ?? 0) / sessionTotalKeystrokes) * 100;
+    accuracy = Math.round(Math.max(0, Math.min(100, rawAccuracy)) * 10) / 10;
+  } else if (totalCharsTyped > 0) {
     const rawAccuracy = (correctChars / totalCharsTyped) * 100;
     accuracy = Math.round(Math.max(0, Math.min(100, rawAccuracy)) * 10) / 10;
   }

@@ -10,10 +10,28 @@ describe('charMatcher', () => {
     expect(isCharMatch('a', 'b')).toBe(false);
   });
 
-  it('enforces capitalization strictly', () => {
-    expect(isCharMatch('A', 'a')).toBe(false);
-    expect(isCharMatch('t', 'T')).toBe(false);
-    expect(isCharMatch('G', 'G')).toBe(true);
+  it('evaluates characters case-insensitively when ignoreCase is enabled', () => {
+    // Uppercase target, lowercase typed (e.g. at start of verse: 'Tuhan' vs 'tuhan')
+    expect(isCharMatch('t', 'T', true)).toBe(true);
+    expect(isCharMatch('T', 't', true)).toBe(true);
+    // Lowercase target, uppercase typed
+    expect(isCharMatch('A', 'a', true)).toBe(true);
+    expect(isCharMatch('a', 'A', true)).toBe(true);
+    // Middle of verse or word (e.g. 'Allah', 'TUHAN', 'orang-orang')
+    expect(isCharMatch('l', 'L', true)).toBe(true);
+    expect(isCharMatch('L', 'l', true)).toBe(true);
+    expect(isCharMatch('h', 'H', true)).toBe(true);
+    // Different characters must still fail
+    expect(isCharMatch('x', 'T', true)).toBe(false);
+    expect(isCharMatch('a', 'b', true)).toBe(false);
+  });
+
+  it('evaluates characters strictly case-sensitive when ignoreCase is disabled', () => {
+    expect(isCharMatch('t', 'T', false)).toBe(false);
+    expect(isCharMatch('T', 't', false)).toBe(false);
+    expect(isCharMatch('A', 'a', false)).toBe(false);
+    expect(isCharMatch('T', 'T', false)).toBe(true);
+    expect(isCharMatch('t', 't', false)).toBe(true);
   });
 
   it('normalizes typographic curly double quotes to straight quotes', () => {

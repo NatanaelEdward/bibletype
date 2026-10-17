@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { TypingStats, RunningTotals } from '../utils/statsCalculator';
-import { RotateCcw, ArrowRight, X } from 'lucide-react';
+import { RotateCcw, ArrowRight, X, BookOpen, Award } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 interface ResultsModalProps {
@@ -14,8 +14,12 @@ interface ResultsModalProps {
   mode: 'single' | 'book' | 'continuous';
   reference: string;
   hasNextUnit: boolean;
+  isBookCompleted?: boolean;
+  nextBookName?: string | null;
   onRetry: () => void;
   onContinue: () => void;
+  onContinueToNextBook?: () => void;
+  onSelectAnotherBook?: () => void;
   onClose: () => void;
 }
 
@@ -25,29 +29,35 @@ export const ResultsModal: React.FC<ResultsModalProps> = ({
   mode,
   reference,
   hasNextUnit,
+  isBookCompleted,
+  nextBookName,
   onRetry,
   onContinue,
+  onContinueToNextBook,
+  onSelectAnotherBook,
   onClose,
 }) => {
-  const [countdown, setCountdown] = useState<number | null>(hasNextUnit ? 5 : null);
+  const [countdown, setCountdown] = useState<number | null>(
+    hasNextUnit && !isBookCompleted ? 5 : null
+  );
 
   useEffect(() => {
-    // Fire celebratory confetti on high accuracy or run completion
-    if (unitStats.accuracy >= 95 || !hasNextUnit) {
+    // Fire celebratory confetti on high accuracy or completion
+    if (unitStats.accuracy >= 95 || isBookCompleted || !hasNextUnit) {
       try {
         confetti({
-          particleCount: 50,
-          spread: 60,
-          origin: { y: 0.7 },
-          colors: ['#e2b714', '#4ecca3', '#d1d0c5'],
+          particleCount: isBookCompleted ? 100 : 50,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ['#A78BFA', '#818CF8', '#C7D2FE', '#86EFAC'],
         });
       } catch {
         // Safe fallback
       }
     }
-  }, [unitStats, hasNextUnit]);
+  }, [unitStats, hasNextUnit, isBookCompleted]);
 
-  // Optional auto-countdown if next unit is waiting
+  // Optional auto-countdown if next unit is waiting and not book completion
   useEffect(() => {
     if (countdown === null || countdown <= 0) return;
     const timer = setTimeout(() => {
@@ -63,7 +73,11 @@ export const ResultsModal: React.FC<ResultsModalProps> = ({
   const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key === 'Enter') {
       e.preventDefault();
-      onContinue();
+      if (isBookCompleted && onContinueToNextBook) {
+        onContinueToNextBook();
+      } else {
+        onContinue();
+      }
     } else if (e.key === 'Tab') {
       e.preventDefault();
       onRetry();
@@ -76,66 +90,81 @@ export const ResultsModal: React.FC<ResultsModalProps> = ({
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onContinue, onRetry, onClose]);
+  }, [onContinue, onRetry, onClose, isBookCompleted, onContinueToNextBook]);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-200">
-      <div className="relative w-full max-w-lg bg-[#24242e] border border-[#3b3c46] rounded-2xl p-6 shadow-2xl text-[#d1d0c5]">
+      <div className="relative w-full max-w-lg bg-[#1E293B] border border-[#334155] rounded-2xl p-6 shadow-2xl text-[#F1F5F9]">
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-[#646669] hover:text-[#d1d0c5] transition"
-          aria-label="Close"
+          className="absolute top-4 right-4 text-[#94A3B8] hover:text-[#F1F5F9] transition"
+          aria-label="Tutup"
         >
           <X size={18} />
         </button>
 
         {/* Header */}
         <div className="mb-6 text-center">
-          <span className="text-xs font-semibold tracking-wider uppercase text-[#e2b714] bg-[#e2b714]/10 px-2.5 py-1 rounded-full">
-            Unit Completed
-          </span>
-          <h2 className="text-xl font-bold mt-2 text-[#d1d0c5]">{reference}</h2>
+          {isBookCompleted ? (
+            <div className="space-y-2">
+              <span className="inline-flex items-center gap-1.5 text-xs font-semibold tracking-wider uppercase text-emerald-400 bg-emerald-950/60 border border-emerald-800/60 px-3 py-1 rounded-full">
+                <Award size={14} />
+                Kitab Selesai!
+              </span>
+              <h2 className="text-xl font-bold text-[#F1F5F9]">{reference}</h2>
+              <p className="text-sm text-[#A78BFA]">
+                Selamat! Anda telah menyelesaikan seluruh ayat dalam kitab ini.
+              </p>
+            </div>
+          ) : (
+            <div>
+              <span className="text-xs font-semibold tracking-wider uppercase text-[#A78BFA] bg-[#A78BFA]/10 border border-[#A78BFA]/20 px-2.5 py-1 rounded-full">
+                Ayat Selesai
+              </span>
+              <h2 className="text-xl font-bold mt-2 text-[#F1F5F9]">{reference}</h2>
+            </div>
+          )}
         </div>
 
         {/* Primary Stats Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
-          <div className="bg-[#1e1e24] p-3.5 rounded-xl border border-[#3b3c46]/60 text-center">
-            <span className="text-xs text-[#646669] block">Net WPM</span>
-            <span className="text-2xl font-bold text-[#e2b714]">{unitStats.netWpm}</span>
+          <div className="bg-[#0F172A] p-3.5 rounded-xl border border-[#334155] text-center">
+            <span className="text-xs text-[#94A3B8] block">WPM Bersih</span>
+            <span className="text-2xl font-bold text-[#A78BFA]">{unitStats.netWpm}</span>
           </div>
-          <div className="bg-[#1e1e24] p-3.5 rounded-xl border border-[#3b3c46]/60 text-center">
-            <span className="text-xs text-[#646669] block">Accuracy</span>
-            <span className="text-2xl font-bold text-[#d1d0c5]">{unitStats.accuracy}%</span>
+          <div className="bg-[#0F172A] p-3.5 rounded-xl border border-[#334155] text-center">
+            <span className="text-xs text-[#94A3B8] block">Akurasi</span>
+            <span className="text-2xl font-bold text-[#F1F5F9]">{unitStats.accuracy}%</span>
           </div>
-          <div className="bg-[#1e1e24] p-3.5 rounded-xl border border-[#3b3c46]/60 text-center">
-            <span className="text-xs text-[#646669] block">Time</span>
-            <span className="text-2xl font-bold text-[#d1d0c5]">{unitStats.elapsedSeconds}s</span>
+          <div className="bg-[#0F172A] p-3.5 rounded-xl border border-[#334155] text-center">
+            <span className="text-xs text-[#94A3B8] block">Waktu</span>
+            <span className="text-2xl font-bold text-[#F1F5F9]">{unitStats.elapsedSeconds}s</span>
           </div>
-          <div className="bg-[#1e1e24] p-3.5 rounded-xl border border-[#3b3c46]/60 text-center">
-            <span className="text-xs text-[#646669] block">Errors</span>
-            <span className="text-2xl font-bold text-[#ca4754]">{unitStats.incorrectChars}</span>
+          <div className="bg-[#0F172A] p-3.5 rounded-xl border border-[#334155] text-center">
+            <span className="text-xs text-[#94A3B8] block">Kesalahan</span>
+            <span className="text-2xl font-bold text-[#FCA5A5]">{unitStats.incorrectChars}</span>
           </div>
         </div>
 
         {/* Cumulative Stats for Book/Continuous Mode */}
         {cumulativeStats && mode !== 'single' && (
-          <div className="mb-6 p-4 rounded-xl bg-[#1e1e24]/70 border border-[#3b3c46]/40">
-            <h4 className="text-xs uppercase tracking-wider text-[#646669] mb-2 font-semibold">
-              Run Running Totals ({cumulativeStats.runningTotals.unitsCompleted} Units)
+          <div className="mb-6 p-4 rounded-xl bg-[#0F172A]/70 border border-[#334155]/60">
+            <h4 className="text-xs uppercase tracking-wider text-[#94A3B8] mb-2 font-semibold">
+              Total Latihan Berjalan ({cumulativeStats.runningTotals.unitsCompleted} Ayat)
             </h4>
-            <div className="flex items-center justify-between text-sm">
+            <div className="flex items-center justify-between text-sm flex-wrap gap-2">
               <div>
-                <span className="text-xs text-[#646669]">Cumulative Net WPM:</span>{' '}
-                <strong className="text-[#e2b714]">{cumulativeStats.cumulativeNetWpm}</strong>
+                <span className="text-xs text-[#94A3B8]">WPM Bersih Kumulatif:</span>{' '}
+                <strong className="text-[#A78BFA]">{cumulativeStats.cumulativeNetWpm}</strong>
               </div>
               <div>
-                <span className="text-xs text-[#646669]">Accuracy:</span>{' '}
-                <strong className="text-[#d1d0c5]">{cumulativeStats.cumulativeAccuracy}%</strong>
+                <span className="text-xs text-[#94A3B8]">Akurasi:</span>{' '}
+                <strong className="text-[#F1F5F9]">{cumulativeStats.cumulativeAccuracy}%</strong>
               </div>
               <div>
-                <span className="text-xs text-[#646669]">Total Time:</span>{' '}
-                <strong className="text-[#d1d0c5]">
+                <span className="text-xs text-[#94A3B8]">Total Waktu:</span>{' '}
+                <strong className="text-[#F1F5F9]">
                   {Math.floor(cumulativeStats.runningTotals.totalTimeSec / 60)}m{' '}
                   {cumulativeStats.runningTotals.totalTimeSec % 60}s
                 </strong>
@@ -145,29 +174,50 @@ export const ResultsModal: React.FC<ResultsModalProps> = ({
         )}
 
         {/* Actions */}
-        <div className="flex items-center justify-between gap-3 pt-2">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
           <button
             onClick={onRetry}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#3b3c46]/50 hover:bg-[#3b3c46] text-[#d1d0c5] text-sm transition"
+            className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#334155]/50 hover:bg-[#334155] text-[#F1F5F9] text-sm transition"
           >
             <RotateCcw size={16} />
-            <span>Retry Unit (Tab)</span>
+            <span>Ulangi Ayat (Tab)</span>
           </button>
 
-          {hasNextUnit ? (
+          {isBookCompleted ? (
+            <div className="w-full sm:w-auto flex items-center gap-2">
+              {onSelectAnotherBook && (
+                <button
+                  onClick={onSelectAnotherBook}
+                  className="w-full sm:w-auto flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#0F172A] border border-[#334155] hover:border-[#94A3B8] text-[#F1F5F9] text-sm font-medium transition"
+                >
+                  <BookOpen size={15} />
+                  <span>Pilih Kitab Lain</span>
+                </button>
+              )}
+              {nextBookName && onContinueToNextBook && (
+                <button
+                  onClick={onContinueToNextBook}
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#A78BFA] hover:bg-[#818CF8] text-[#0F172A] font-semibold text-sm transition shadow-lg"
+                >
+                  <span>Lanjut ke {nextBookName} (Enter)</span>
+                  <ArrowRight size={16} />
+                </button>
+              )}
+            </div>
+          ) : hasNextUnit ? (
             <button
               onClick={onContinue}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#e2b714] hover:bg-[#f0c422] text-[#1e1e24] font-semibold text-sm transition shadow-lg"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#A78BFA] hover:bg-[#818CF8] text-[#0F172A] font-semibold text-sm transition shadow-lg"
             >
-              <span>Continue {countdown !== null ? `(${countdown}s)` : ''} (Enter)</span>
+              <span>Lanjut {countdown !== null ? `(${countdown}s)` : ''} (Enter)</span>
               <ArrowRight size={16} />
             </button>
           ) : (
             <button
               onClick={onClose}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#e2b714] hover:bg-[#f0c422] text-[#1e1e24] font-semibold text-sm transition shadow-lg"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#A78BFA] hover:bg-[#818CF8] text-[#0F172A] font-semibold text-sm transition shadow-lg"
             >
-              <span>Finish Run</span>
+              <span>Selesai</span>
             </button>
           )}
         </div>

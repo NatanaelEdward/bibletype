@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { BIBLE_BOOKS, BookMetadata } from '../data/bibleData';
-import { Translation } from '../data/scriptureStore';
 import { X, Search } from 'lucide-react';
 
 interface PassageSelectorProps {
@@ -8,7 +7,7 @@ interface PassageSelectorProps {
   currentChapter: number;
   currentStartVerse?: number;
   mode: 'single' | 'book' | 'continuous';
-  language: Translation;
+  language?: string;
   onSelect: (selection: {
     bookId: string;
     chapter: number;
@@ -23,7 +22,6 @@ export const PassageSelector: React.FC<PassageSelectorProps> = ({
   currentChapter,
   currentStartVerse,
   mode,
-  language,
   onSelect,
   onClose,
 }) => {
@@ -38,41 +36,49 @@ export const PassageSelector: React.FC<PassageSelectorProps> = ({
   const filteredBooks = BIBLE_BOOKS.filter(book => {
     if (testamentFilter !== 'ALL' && book.testament !== testamentFilter) return false;
     if (!searchQuery) return true;
-    const name = language === 'WEB' ? book.nameEn : book.nameId;
-    return name.toLowerCase().includes(searchQuery.toLowerCase()) || book.id.toLowerCase().includes(searchQuery.toLowerCase());
+    const name = book.nameId;
+    return (
+      name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      book.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      book.nameEn.toLowerCase().includes(searchQuery.toLowerCase())
+    );
   });
 
-  const totalVersesInChapter = selectedBook.chapterVerses[selectedChapter - 1] || 25;
+  const totalVersesInChapter = selectedBook.chapterVerses[selectedChapter - 1] || 1;
 
   const handleApply = () => {
+    // Ensure selected start verse is properly clamped and preserved across all modes
+    const validStartVerse = Math.max(1, Math.min(selectedStartVerse, totalVersesInChapter));
     onSelect({
       bookId: selectedBook.id,
       chapter: selectedChapter,
-      startVerse: mode === 'continuous' ? selectedStartVerse : 1,
+      startVerse: validStartVerse,
     });
     onClose();
   };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-200">
-      <div className="relative w-full max-w-2xl bg-[#24242e] border border-[#3b3c46] rounded-2xl p-6 shadow-2xl text-[#d1d0c5] flex flex-col max-h-[85vh]">
+      <div className="relative w-full max-w-2xl bg-[#1E293B] border border-[#334155] rounded-2xl p-6 shadow-2xl text-[#F1F5F9] flex flex-col max-h-[85vh]">
         {/* Header */}
-        <div className="flex items-center justify-between pb-4 border-b border-[#3b3c46]">
+        <div className="flex items-center justify-between pb-4 border-b border-[#334155]">
           <div>
-            <h2 className="text-lg font-bold text-[#d1d0c5]">
-              Select Scripture Passage
+            <h2 className="text-lg font-bold text-[#F1F5F9]">
+              Pilih Ayat Alkitab
             </h2>
-            <p className="text-xs text-[#646669] mt-0.5">
+            <p className="text-xs text-[#94A3B8] mt-0.5">
               {mode === 'continuous'
-                ? 'Choose where your continuous journey starts'
+                ? 'Lanjutkan mengetik dari posisi terakhir yang tersimpan.'
                 : mode === 'book'
-                ? 'Select book and starting chapter'
-                : 'Select passage to practice'}
+                ? 'Ketik ayat secara berurutan hingga seluruh kitab selesai.'
+                : 'Pilih satu ayat dan mulai mengetik dari ayat tersebut.'}
             </p>
           </div>
           <button
             onClick={onClose}
-            className="text-[#646669] hover:text-[#d1d0c5] transition p-1"
+            className="text-[#94A3B8] hover:text-[#F1F5F9] transition p-1"
+            title="Tutup"
+            aria-label="Tutup"
           >
             <X size={20} />
           </button>
@@ -83,27 +89,33 @@ export const PassageSelector: React.FC<PassageSelectorProps> = ({
           {/* Testament Filters & Search */}
           <div className="flex flex-col sm:flex-row gap-2">
             <div className="relative flex-1">
-              <Search className="absolute left-3 top-2.5 text-[#646669]" size={16} />
+              <Search className="absolute left-3 top-2.5 text-[#94A3B8]" size={16} />
               <input
                 type="text"
-                placeholder="Search book..."
+                placeholder="Cari kitab..."
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                className="w-full pl-9 pr-3 py-2 bg-[#1e1e24] border border-[#3b3c46] rounded-xl text-sm text-[#d1d0c5] placeholder-[#646669] focus:outline-hidden focus:border-[#e2b714]"
+                className="w-full pl-9 pr-3 py-2 bg-[#0F172A] border border-[#334155] rounded-xl text-sm text-[#F1F5F9] placeholder-[#94A3B8] focus:outline-hidden focus:border-[#A78BFA]"
               />
             </div>
-            <div className="flex rounded-xl bg-[#1e1e24] p-1 border border-[#3b3c46]">
-              {(['ALL', 'OT', 'NT'] as const).map(f => (
+            <div className="flex rounded-xl bg-[#0F172A] p-1 border border-[#334155]">
+              {(
+                [
+                  { key: 'ALL', label: 'Semua' },
+                  { key: 'OT', label: 'Perjanjian Lama' },
+                  { key: 'NT', label: 'Perjanjian Baru' },
+                ] as const
+              ).map(({ key, label }) => (
                 <button
-                  key={f}
-                  onClick={() => setTestamentFilter(f)}
+                  key={key}
+                  onClick={() => setTestamentFilter(key)}
                   className={`px-3 py-1 text-xs rounded-lg font-medium transition ${
-                    testamentFilter === f
-                      ? 'bg-[#e2b714] text-[#1e1e24]'
-                      : 'text-[#646669] hover:text-[#d1d0c5]'
+                    testamentFilter === key
+                      ? 'bg-[#A78BFA] text-[#0F172A]'
+                      : 'text-[#94A3B8] hover:text-[#F1F5F9]'
                   }`}
                 >
-                  {f === 'ALL' ? 'All' : f === 'OT' ? 'Old' : 'New'}
+                  {label}
                 </button>
               ))}
             </div>
@@ -111,11 +123,10 @@ export const PassageSelector: React.FC<PassageSelectorProps> = ({
 
           {/* Book Grid */}
           <div>
-            <span className="text-xs font-semibold text-[#646669] block mb-2">Book</span>
+            <span className="text-xs font-semibold text-[#94A3B8] block mb-2">Kitab</span>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 max-h-40 overflow-y-auto pr-1">
               {filteredBooks.map(book => {
                 const isSelected = selectedBook.id === book.id;
-                const bookName = language === 'WEB' ? book.nameEn : book.nameId;
                 return (
                   <button
                     key={book.id}
@@ -126,12 +137,12 @@ export const PassageSelector: React.FC<PassageSelectorProps> = ({
                     }}
                     className={`px-3 py-2 text-left rounded-xl text-xs font-medium transition border ${
                       isSelected
-                        ? 'bg-[#e2b714]/15 border-[#e2b714] text-[#e2b714]'
-                        : 'bg-[#1e1e24] border-[#3b3c46] text-[#d1d0c5] hover:border-[#646669]'
+                        ? 'bg-[#A78BFA]/15 border-[#A78BFA] text-[#A78BFA]'
+                        : 'bg-[#0F172A] border-[#334155] text-[#F1F5F9] hover:border-[#818CF8]/50'
                     }`}
                   >
-                    <div className="truncate font-semibold">{bookName}</div>
-                    <div className="text-[10px] text-[#646669]">{book.totalChapters} ch</div>
+                    <div className="truncate font-semibold">{book.nameId}</div>
+                    <div className="text-[10px] text-[#94A3B8]">{book.totalChapters} pasal</div>
                   </button>
                 );
               })}
@@ -140,8 +151,8 @@ export const PassageSelector: React.FC<PassageSelectorProps> = ({
 
           {/* Chapter Selector */}
           <div>
-            <span className="text-xs font-semibold text-[#646669] block mb-2">
-              Chapter (1 – {selectedBook.totalChapters})
+            <span className="text-xs font-semibold text-[#94A3B8] block mb-2">
+              Pasal (1 – {selectedBook.totalChapters})
             </span>
             <div className="flex flex-wrap gap-1.5 max-h-32 overflow-y-auto pr-1">
               {Array.from({ length: selectedBook.totalChapters }, (_, i) => i + 1).map(ch => (
@@ -153,8 +164,8 @@ export const PassageSelector: React.FC<PassageSelectorProps> = ({
                   }}
                   className={`w-9 h-9 rounded-lg text-xs font-medium transition flex items-center justify-center border ${
                     selectedChapter === ch
-                      ? 'bg-[#e2b714] text-[#1e1e24] border-[#e2b714] font-bold'
-                      : 'bg-[#1e1e24] text-[#d1d0c5] border-[#3b3c46] hover:border-[#646669]'
+                      ? 'bg-[#A78BFA] text-[#0F172A] border-[#A78BFA] font-bold'
+                      : 'bg-[#0F172A] text-[#F1F5F9] border-[#334155] hover:border-[#818CF8]/50'
                   }`}
                 >
                   {ch}
@@ -165,8 +176,8 @@ export const PassageSelector: React.FC<PassageSelectorProps> = ({
 
           {/* Verse Selector */}
           <div>
-            <span className="text-xs font-semibold text-[#646669] block mb-2">
-              Verse (1 – {totalVersesInChapter})
+            <span className="text-xs font-semibold text-[#94A3B8] block mb-2">
+              Ayat (1 – {totalVersesInChapter})
             </span>
             <div className="flex flex-wrap gap-1.5 max-h-32 overflow-y-auto pr-1">
               {Array.from({ length: totalVersesInChapter }, (_, i) => i + 1).map(v => (
@@ -175,8 +186,8 @@ export const PassageSelector: React.FC<PassageSelectorProps> = ({
                   onClick={() => setSelectedStartVerse(v)}
                   className={`w-8 h-8 rounded-lg text-xs font-medium transition flex items-center justify-center border ${
                     selectedStartVerse === v
-                      ? 'bg-[#e2b714] text-[#1e1e24] border-[#e2b714] font-bold'
-                      : 'bg-[#1e1e24] text-[#d1d0c5] border-[#3b3c46] hover:border-[#646669]'
+                      ? 'bg-[#A78BFA] text-[#0F172A] border-[#A78BFA] font-bold'
+                      : 'bg-[#0F172A] text-[#F1F5F9] border-[#334155] hover:border-[#818CF8]/50'
                   }`}
                 >
                   {v}
@@ -187,18 +198,18 @@ export const PassageSelector: React.FC<PassageSelectorProps> = ({
         </div>
 
         {/* Footer Apply */}
-        <div className="pt-4 border-t border-[#3b3c46] flex items-center justify-between">
-          <div className="text-xs text-[#646669]">
-            Selected:{' '}
-            <strong className="text-[#e2b714]">
-              {language === 'WEB' ? selectedBook.nameEn : selectedBook.nameId} {selectedChapter}:{selectedStartVerse}
+        <div className="pt-4 border-t border-[#334155] flex items-center justify-between">
+          <div className="text-xs text-[#94A3B8]">
+            Dipilih:{' '}
+            <strong className="text-[#A78BFA]">
+              {selectedBook.nameId} {selectedChapter}:{selectedStartVerse}
             </strong>
           </div>
           <button
             onClick={handleApply}
-            className="px-5 py-2 rounded-xl bg-[#e2b714] hover:bg-[#f0c422] text-[#1e1e24] font-semibold text-sm transition"
+            className="px-5 py-2 rounded-xl bg-[#A78BFA] hover:bg-[#818CF8] text-[#0F172A] font-semibold text-sm transition shadow-sm"
           >
-            Start Practice
+            Mulai Mengetik
           </button>
         </div>
       </div>

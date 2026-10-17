@@ -40,7 +40,7 @@ export const SavedEntriesModal: React.FC<SavedEntriesModalProps> = ({
 
   const handleSaveEdit = (entryId: string) => {
     if (!editText.trim()) {
-      setEditError('Verse content cannot be empty.');
+      setEditError('Teks ayat tidak boleh kosong.');
       return;
     }
 
@@ -50,27 +50,29 @@ export const SavedEntriesModal: React.FC<SavedEntriesModalProps> = ({
       setEditError(null);
       onRefreshEntries();
     } else {
-      setEditError(res.error || 'Failed to update entry.');
+      setEditError(res.error || 'Gagal memperbarui ayat.');
     }
   };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-200">
-      <div className="relative w-full max-w-2xl bg-[#24242e] border border-[#3b3c46] rounded-2xl p-6 shadow-2xl text-[#d1d0c5] flex flex-col max-h-[85vh]">
+      <div className="relative w-full max-w-2xl bg-[#1E293B] border border-[#334155] rounded-2xl p-6 shadow-2xl text-[#F1F5F9] flex flex-col max-h-[85vh]">
         {/* Header */}
-        <div className="flex items-center justify-between pb-4 border-b border-[#3b3c46]">
+        <div className="flex items-center justify-between pb-4 border-b border-[#334155]">
           <div>
-            <h2 className="text-lg font-bold text-[#d1d0c5] flex items-center gap-2">
-              <BookOpen className="text-[#e2b714]" size={20} />
-              <span>Saved Verse Entries ({entries.length})</span>
+            <h2 className="text-lg font-bold text-[#F1F5F9] flex items-center gap-2">
+              <BookOpen className="text-[#A78BFA]" size={20} />
+              <span>Ayat Tersimpan ({entries.length})</span>
             </h2>
-            <p className="text-xs text-[#646669] mt-0.5">
-              Each verse is saved independently with its own reference and content
+            <p className="text-xs text-[#94A3B8] mt-0.5">
+              Setiap ayat tersimpan secara independen dengan referensi dan teksnya masing-masing
             </p>
           </div>
           <button
             onClick={onClose}
-            className="text-[#646669] hover:text-[#d1d0c5] transition p-1"
+            className="text-[#94A3B8] hover:text-[#F1F5F9] transition p-1"
+            title="Tutup"
+            aria-label="Tutup"
           >
             <X size={20} />
           </button>
@@ -79,13 +81,13 @@ export const SavedEntriesModal: React.FC<SavedEntriesModalProps> = ({
         {/* Search */}
         <div className="pt-4 pb-2">
           <div className="relative">
-            <Search className="absolute left-3 top-2.5 text-[#646669]" size={16} />
+            <Search className="absolute left-3 top-2.5 text-[#94A3B8]" size={16} />
             <input
               type="text"
-              placeholder="Search saved verses by reference or text..."
+              placeholder="Cari ayat tersimpan berdasarkan referensi atau teks..."
               value={search}
               onChange={e => setSearch(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 bg-[#1e1e24] border border-[#3b3c46] rounded-xl text-sm text-[#d1d0c5] placeholder-[#646669] focus:outline-hidden focus:border-[#e2b714]"
+              className="w-full pl-9 pr-3 py-2 bg-[#0F172A] border border-[#334155] rounded-xl text-sm text-[#F1F5F9] placeholder-[#94A3B8] focus:outline-hidden focus:border-[#A78BFA]"
             />
           </div>
         </div>
@@ -93,10 +95,10 @@ export const SavedEntriesModal: React.FC<SavedEntriesModalProps> = ({
         {/* Entries List */}
         <div className="flex-1 overflow-y-auto py-2 space-y-3 pr-1">
           {filteredEntries.length === 0 ? (
-            <div className="p-8 text-center text-xs text-[#646669] bg-[#1e1e24] rounded-xl border border-[#3b3c46]">
+            <div className="p-8 text-center text-xs text-[#94A3B8] bg-[#0F172A] rounded-xl border border-[#334155]">
               {entries.length === 0
-                ? 'No verses saved yet. Complete and save a verse to record your entry!'
-                : 'No saved verses match your search.'}
+                ? 'Belum ada ayat yang tersimpan. Ketik dan simpan ayat untuk mencatat entri Anda!'
+                : 'Tidak ada ayat tersimpan yang cocok dengan pencarian Anda.'}
             </div>
           ) : (
             filteredEntries.map(entry => {
@@ -108,35 +110,35 @@ export const SavedEntriesModal: React.FC<SavedEntriesModalProps> = ({
                   key={entry.id}
                   className={`p-4 rounded-xl border transition ${
                     isCurrent
-                      ? 'bg-[#1e1e24] border-[#e2b714]/60 ring-1 ring-[#e2b714]/30'
-                      : 'bg-[#1e1e24] border-[#3b3c46]'
+                      ? 'bg-[#0F172A] border-[#A78BFA]/60 ring-1 ring-[#A78BFA]/30'
+                      : 'bg-[#0F172A] border-[#334155]'
                   }`}
                 >
                   {/* Top Bar of Card */}
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
-                      <span className="font-bold text-sm text-[#e2b714]">{entry.reference}</span>
-                      <span className="text-[10px] px-2 py-0.5 rounded bg-[#24242e] border border-[#3b3c46] text-[#646669]">
+                      <span className="font-bold text-sm text-[#A78BFA]">{entry.reference}</span>
+                      <span className="text-[10px] px-2 py-0.5 rounded bg-[#1E293B] border border-[#334155] text-[#94A3B8]">
                         {entry.translation}
                       </span>
                       {isCurrent && (
-                        <span className="text-[10px] px-2 py-0.5 rounded bg-[#e2b714]/10 text-[#e2b714] font-semibold">
-                          Current Reading Position
+                        <span className="text-[10px] px-2 py-0.5 rounded bg-[#A78BFA]/10 text-[#A78BFA] font-semibold">
+                          Posisi Membaca Saat Ini
                         </span>
                       )}
                     </div>
 
                     <div className="flex items-center gap-2">
                       {entry.wpm !== undefined && (
-                        <span className="text-xs text-[#646669]">
-                          <strong className="text-[#d1d0c5]">{entry.wpm}</strong> WPM
+                        <span className="text-xs text-[#94A3B8]">
+                          <strong className="text-[#F1F5F9]">{entry.wpm}</strong> WPM
                         </span>
                       )}
                       {!isEditing && (
                         <button
                           onClick={() => handleStartEdit(entry)}
-                          className="p-1.5 rounded-lg bg-[#24242e] hover:bg-[#3b3c46] text-[#646669] hover:text-[#d1d0c5] transition"
-                          title="Edit this previous entry without changing your current reading position"
+                          className="p-1.5 rounded-lg bg-[#1E293B] hover:bg-[#334155] text-[#94A3B8] hover:text-[#F1F5F9] transition"
+                          title="Edit ayat ini tanpa mengubah posisi membaca Anda saat ini"
                         >
                           <Edit3 size={14} />
                         </button>
@@ -151,7 +153,7 @@ export const SavedEntriesModal: React.FC<SavedEntriesModalProps> = ({
                         value={editText}
                         onChange={e => setEditText(e.target.value)}
                         rows={3}
-                        className="w-full p-2.5 bg-[#24242e] border border-[#3b3c46] rounded-xl text-sm text-[#d1d0c5] focus:outline-hidden focus:border-[#e2b714]"
+                        className="w-full p-2.5 bg-[#1E293B] border border-[#334155] rounded-xl text-sm text-[#F1F5F9] focus:outline-hidden focus:border-[#A78BFA]"
                       />
                       {editError && (
                         <div className="flex items-center gap-1.5 text-xs text-red-400">
@@ -162,31 +164,31 @@ export const SavedEntriesModal: React.FC<SavedEntriesModalProps> = ({
                       <div className="flex items-center justify-end gap-2">
                         <button
                           onClick={() => setEditingEntryId(null)}
-                          className="px-3 py-1 bg-[#24242e] hover:bg-[#3b3c46] text-xs rounded-lg text-[#d1d0c5]"
+                          className="px-3 py-1 bg-[#1E293B] hover:bg-[#334155] text-xs rounded-lg text-[#F1F5F9]"
                         >
-                          Cancel
+                          Batal
                         </button>
                         <button
                           onClick={() => handleSaveEdit(entry.id)}
-                          className="px-3 py-1 bg-[#e2b714] hover:bg-[#f0c422] text-xs text-[#1e1e24] font-semibold rounded-lg flex items-center gap-1"
+                          className="px-3 py-1 bg-[#A78BFA] hover:bg-[#818CF8] text-xs text-[#0F172A] font-semibold rounded-lg flex items-center gap-1 shadow-sm"
                         >
                           <Check size={14} />
-                          <span>Save Changes</span>
+                          <span>Simpan Perubahan</span>
                         </button>
                       </div>
                     </div>
                   ) : (
-                    <p className="text-xs text-[#d1d0c5] leading-relaxed mb-2 font-mono">
+                    <p className="text-xs text-[#F1F5F9] leading-relaxed mb-2 font-mono">
                       {entry.verseText}
                     </p>
                   )}
 
                   {/* Footer Info */}
-                  <div className="flex items-center justify-between text-[10px] text-[#646669] pt-2 border-t border-[#3b3c46]/40">
+                  <div className="flex items-center justify-between text-[10px] text-[#94A3B8] pt-2 border-t border-[#334155]/40">
                     <span className="flex items-center gap-1">
                       <Calendar size={12} />
-                      <span>Saved: {new Date(entry.savedAt).toLocaleString()}</span>
-                      {entry.updatedAt && <span>(edited)</span>}
+                      <span>Disimpan: {new Date(entry.savedAt).toLocaleString('id-ID')}</span>
+                      {entry.updatedAt && <span>(diedit)</span>}
                     </span>
                     {onJumpToVerse && !isCurrent && (
                       <button
@@ -194,9 +196,9 @@ export const SavedEntriesModal: React.FC<SavedEntriesModalProps> = ({
                           onJumpToVerse(entry.bookId, entry.chapter, entry.verse);
                           onClose();
                         }}
-                        className="text-[#e2b714] hover:underline"
+                        className="text-[#A78BFA] hover:underline"
                       >
-                        Go to this verse
+                        Buka ayat ini
                       </button>
                     )}
                   </div>

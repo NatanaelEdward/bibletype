@@ -1,5 +1,6 @@
 {
-  "name": "bibletype",
+  "name": "bible-typing-indonesia",
+  "description": "Bible Typing Indonesia — Minimalist Scripture Typing",
   "private": true,
   "version": "0.0.0",
   "type": "module",

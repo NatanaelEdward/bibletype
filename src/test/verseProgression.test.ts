@@ -110,16 +110,15 @@ describe('Verse Progression & Bible Reference Navigation', () => {
     expect(prev.isStart).toBe(true);
   });
 
-  it('retrieves accurate authentic verse text for Kidung Agung in Indonesian (AYT) and English (WEB)', () => {
+  it('retrieves accurate authentic verse text for Kidung Agung in Indonesian (AYT)', () => {
     const aytVerse = getVerse('SNG', 1, 1, 'AYT');
     expect(aytVerse.reference).toBe('Kidung Agung 1:1');
     // Exact AYT wording as published by YLSA (see src/data/ayt/PROVENANCE.md).
     expect(aytVerse.text).toBe('Nyanyian di atas segala nyanyian dari Salomo.');
     expect(aytVerse.textAvailable).toBe(true);
 
-    const webVerse = getVerse('SNG', 1, 1, 'WEB');
-    expect(webVerse.reference).toBe('Song of Solomon 1:1');
-    expect(webVerse.text).toBe('The Song of songs, which is Solomon’s.');
-    expect(webVerse.textAvailable).toBe(true);
+    const nextVerse = getVerse('SNG', 1, 2, 'AYT');
+    expect(nextVerse.reference).toBe('Kidung Agung 1:2');
+    expect(nextVerse.textAvailable).toBe(true);
   });
 });

@@ -344,23 +344,18 @@ describe('AYT — verse progression across the whole canon', () => {
 
 describe('AYT — missing text is reported honestly, never invented', () => {
   it('returns the unavailable message and flags it for text the app does not have', () => {
-    // WEB is intentionally a small authentic excerpt; most of it is not bundled.
-    const result = getVerse('GEN', 20, 1, 'WEB');
+    // Unsupported or unbundled translation requests return textAvailable: false honestly
+    const result = getVerse('GEN', 20, 1, 'WEB' as any);
     expect(result.textAvailable).toBe(false);
     expect(result.text).toBe(UNAVAILABLE_TEXT_MESSAGE.WEB);
-    expect(result.reference).toBe('Genesis 20:1');
+    expect(result.reference).toBe('Kejadian 20:1');
   });
 
-  it('still reports an honest reference for a verse the bundled WEB excerpt omits', () => {
-    const result = getVerse('REV', 22, 19, 'WEB');
+  it('still reports an honest reference for a verse without bundled text', () => {
+    const result = getVerse('REV', 22, 19, 'WEB' as any);
     expect(result.textAvailable).toBe(false);
     expect(result.text).toBe(UNAVAILABLE_TEXT_MESSAGE.WEB);
-    expect(result.reference).toBe('Revelation 22:19');
-
-    // The verses WEB does bundle are still served normally.
-    const bundled = getVerse('REV', 22, 21, 'WEB');
-    expect(bundled.textAvailable).toBe(true);
-    expect(bundled.text).toBe('The grace of the Lord Jesus Christ be with all the saints. Amen.');
+    expect(result.reference).toBe('Wahyu 22:19');
   });
 
   it('honours an explicit verse range and only ever returns real verses', () => {
@@ -380,20 +375,18 @@ describe('AYT — missing text is reported honestly, never invented', () => {
     expect(beyond.verses.map(v => v.verseNumber)).toEqual([31]);
   });
 
-  it('indexes verses by translation as well as book, chapter and verse', () => {
-    // The same coordinates resolve to different, independently authentic texts per translation.
+  it('supports authentic Indonesian AYT text and returns empty for unsupported translations', () => {
     const ayt = getVerse('SNG', 1, 1, 'AYT');
-    const web = getVerse('SNG', 1, 1, 'WEB');
-    expect(ayt.text).not.toBe(web.text);
+    expect(ayt.text).toBe('Nyanyian di atas segala nyanyian dari Salomo.');
     expect(ayt.translation).toBe('AYT');
-    expect(web.translation).toBe('WEB');
+    expect(ayt.textAvailable).toBe(true);
 
     const aytChapter = getChapterVerses('SNG', 1, 'AYT');
-    const webChapter = getChapterVerses('SNG', 1, 'WEB');
     expect(aytChapter).toHaveLength(17);
-    expect(webChapter).toHaveLength(17);
     expect(aytChapter[0].text).toBe('Nyanyian di atas segala nyanyian dari Salomo.');
-    expect(webChapter[0].text).toBe('The Song of songs, which is Solomon’s.');
+
+    const webChapter = getChapterVerses('SNG', 1, 'WEB' as any);
+    expect(webChapter).toHaveLength(0);
   });
 
   it('never emits a fabricated passage for a chapter with no bundled text', () => {

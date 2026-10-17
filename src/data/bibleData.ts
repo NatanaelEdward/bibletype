@@ -109,6 +109,28 @@ export function getVerseCount(bookId: string, chapter: number): number {
   return book.chapterVerses[clampedChapter - 1] || 1;
 }
 
+export function getTotalVersesInBook(bookId: string): number {
+  const book = getBookById(bookId);
+  if (!book) return 0;
+  return book.chapterVerses.reduce((sum, count) => sum + count, 0);
+}
+
+export function getVerseIndexInBook(bookId: string, chapter: number, verse: number): number {
+  const book = getBookById(bookId);
+  if (!book) return 1;
+  let index = 0;
+  for (let c = 1; c < chapter; c++) {
+    index += book.chapterVerses[c - 1] || 0;
+  }
+  return index + verse;
+}
+
+export function isLastVerseInBook(bookId: string, chapter: number, verse: number): boolean {
+  const book = getBookById(bookId);
+  if (!book) return false;
+  return chapter === book.totalChapters && verse === (book.chapterVerses[book.totalChapters - 1] || 0);
+}
+
 export interface VersePosition {
   bookId: string;
   chapter: number;

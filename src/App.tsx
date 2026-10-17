@@ -10,12 +10,16 @@ import { SavedEntriesModal } from './components/SavedEntriesModal';
 import { useTypingEngine } from './hooks/useTypingEngine';
 import {
   getVerse,
-  Translation,
   VerseResult,
 } from './data/scriptureStore';
 import {
   getNextVersePosition,
   getPrevVersePosition,
+  getBookById,
+  getNextBook,
+  getTotalVersesInBook,
+  getVerseIndexInBook,
+  isLastVerseInBook,
 } from './data/bibleData';
 import {
   loadStore,
@@ -40,13 +44,16 @@ import {
   AlertCircle,
   Save,
   RotateCcw,
+  BookOpen,
+  ArrowRight,
+  Sparkles,
 } from 'lucide-react';
 
 export function App() {
   // Persistence store
   const [store, setStore] = useState<BibleTypeStore>(() => loadStore());
 
-  // Practice mode
+  // Practice mode: 'single' (Ayat Pilihan), 'book' (Per Kitab), 'continuous' (Lanjutkan)
   const [mode, setMode] = useState<'single' | 'book' | 'continuous'>(() => {
     return store.activeRun ? store.activeRun.mode : 'single';
   });
@@ -88,6 +95,7 @@ export function App() {
   const [completedStats, setCompletedStats] = useState<TypingStats | null>(null);
   const [saveError, setSaveError] = useState<string | null>(null);
   const [saveSuccessNotice, setSaveSuccessNotice] = useState<string | null>(null);
+  const [bookCompletionShown, setBookCompletionShown] = useState<boolean>(false);
 
   // Sync store to LocalStorage
   useEffect(() => {
@@ -103,10 +111,10 @@ export function App() {
     }));
   }, [bookId, chapter, verse]);
 
-  // Resolve current active verse
+  // Resolve current active verse in Indonesian AYT
   const currentVerseResult: VerseResult = useMemo(() => {
-    return getVerse(bookId, chapter, verse, store.settings.language);
-  }, [bookId, chapter, verse, store.settings.language]);
+    return getVerse(bookId, chapter, verse, 'AYT');
+  }, [bookId, chapter, verse]);
 
   const targetText = useMemo(() => {
     return normalizeScriptureText(currentVerseResult.text);
@@ -124,8 +132,34 @@ export function App() {
   // Next verse preview
   const nextVerseResult = useMemo(() => {
     if (nextVersePos.isEnd) return null;
-    return getVerse(nextVersePos.bookId, nextVersePos.chapter, nextVersePos.verse, store.settings.language);
-  }, [nextVersePos, store.settings.language]);
+    return getVerse(nextVersePos.bookId, nextVersePos.chapter, nextVersePos.verse, 'AYT');
+  }, [nextVersePos]);
+
+  // Book metadata & progress
+  const currentBook = useMemo(() => {
+    return getBookById(bookId);
+  }, [bookId]);
+
+  const nextBook = useMemo(() => {
+    return getNextBook(bookId);
+  }, [bookId]);
+
+  const totalVersesInCurrentBook = useMemo(() => {
+    return getTotalVersesInBook(bookId);
+  }, [bookId]);
+
+  const currentVerseIndexInBook = useMemo(() => {
+    return getVerseIndexInBook(bookId, chapter, verse);
+  }, [bookId, chapter, verse]);
+
+  const isCurrentVerseLastInBook = useMemo(() => {
+    return isLastVerseInBook(bookId, chapter, verse);
+  }, [bookId, chapter, verse]);
+
+  const bookProgressPercent = useMemo(() => {
+    if (totalVersesInCurrentBook === 0) return 0;
+    return Math.round((currentVerseIndexInBook / totalVersesInCurrentBook) * 100);
+  }, [currentVerseIndexInBook, totalVersesInCurrentBook]);
 
   // Check if current verse is already saved
   const existingSavedEntry = useMemo(() => {
@@ -148,6 +182,7 @@ export function App() {
     setVerse(nextVersePos.verse);
     setCompletedStats(null);
     setSaveError(null);
+    setBookCompletionShown(false);
   }, [nextVersePos]);
 
   const handlePrevVerse = useCallback(() => {
@@ -157,6 +192,7 @@ export function App() {
     setVerse(prevVersePos.verse);
     setCompletedStats(null);
     setSaveError(null);
+    setBookCompletionShown(false);
   }, [prevVersePos]);
 
   // Save current verse entry with data integrity
@@ -165,7 +201,7 @@ export function App() {
       // Never store a non-verse: without authentic text there is nothing meaningful to save.
       if (!currentVerseResult.textAvailable) {
         setSaveError(
-          `No authentic ${store.settings.language} text is bundled for ${currentVerseResult.reference}, so there is nothing to type or save. The app does not generate substitute scripture.`
+          `Teks Alkitab AYT belum tersedia untuk ${currentVerseResult.reference}, sehingga tidak ada yang dapat diketik atau disimpan. Aplikasi tidak membuat teks tiruan.`
         );
         return false;
       }
@@ -176,36 +212,53 @@ export function App() {
         chapter,
         verse,
         reference: currentVerseResult.reference,
-        translation: store.settings.language,
+        translation: 'AYT',
         verseText: currentVerseResult.text,
         wpm: stats.netWpm,
         accuracy: stats.accuracy,
       });
 
       if (!saveResult.success) {
-        setSaveError(saveResult.error || 'Failed to save verse entry. Your text and position are intact. Please retry.');
+        setSaveError(saveResult.error || 'Gagal menyimpan ayat. Teks dan posisi Anda tetap aman. Silakan coba lagi.');
         return false;
       }
 
       setSaveError(null);
-      setSaveSuccessNotice(`Saved ${currentVerseResult.reference}`);
+      setSaveSuccessNotice(`${currentVerseResult.reference} berhasil disimpan!`);
       setTimeout(() => setSaveSuccessNotice(null), 3000);
 
       // Refresh store with latest saved entries
       setStore(loadStore());
 
-      // Advance only after successful save
-      if (shouldAdvance && !nextVersePos.isEnd) {
-        setBookId(nextVersePos.bookId);
-        setChapter(nextVersePos.chapter);
-        setVerse(nextVersePos.verse);
-        setUnitIndex(prev => prev + 1);
+      // Advance logic depending on mode and book boundaries
+      if (shouldAdvance) {
+        if (mode === 'book' && isCurrentVerseLastInBook) {
+          // In Per Kitab mode, pause at book completion and do not silently leave
+          setBookCompletionShown(true);
+        } else if (!nextVersePos.isEnd) {
+          setBookId(nextVersePos.bookId);
+          setChapter(nextVersePos.chapter);
+          setVerse(nextVersePos.verse);
+          setUnitIndex(prev => prev + 1);
+        }
       }
 
       return true;
     },
-    [bookId, chapter, verse, currentVerseResult, store.settings.language, nextVersePos]
+    [bookId, chapter, verse, currentVerseResult, mode, isCurrentVerseLastInBook, nextVersePos]
   );
+
+  // Advance to next canonical book (used when user chooses to continue after book completion)
+  const handleContinueToNextBook = useCallback(() => {
+    if (!nextBook) return;
+    setBookId(nextBook.id);
+    setChapter(1);
+    setVerse(1);
+    setUnitIndex(1);
+    setCompletedStats(null);
+    setSaveError(null);
+    setBookCompletionShown(false);
+  }, [nextBook]);
 
   // Completion callback triggered by useTypingEngine
   const handleUnitComplete = useCallback(
@@ -220,7 +273,7 @@ export function App() {
         id: 'sess_' + Date.now() + '_' + Math.random().toString(36).substring(2, 6),
         date: new Date().toISOString(),
         reference: currentVerseResult.reference,
-        translation: store.settings.language,
+        translation: 'AYT',
         mode,
         grossWpm: stats.grossWpm,
         netWpm: stats.netWpm,
@@ -265,7 +318,13 @@ export function App() {
 
       // 4. Auto-save entry and advance if immediate
       if (store.settings.autoContinue === 'immediate') {
-        executeSaveVerse(stats, true);
+        if (mode === 'book' && isCurrentVerseLastInBook) {
+          executeSaveVerse(stats, false);
+          setCompletedStats(stats);
+          setBookCompletionShown(true);
+        } else {
+          executeSaveVerse(stats, true);
+        }
       } else {
         // Show summary modal with option to continue and save
         setCompletedStats(stats);
@@ -274,9 +333,9 @@ export function App() {
     [
       runningTotals,
       currentVerseResult.reference,
-      store.settings.language,
       store.settings.autoContinue,
       mode,
+      isCurrentVerseLastInBook,
       executeSaveVerse,
     ]
   );
@@ -297,6 +356,7 @@ export function App() {
     targetText,
     soundEnabled: store.settings.soundEnabled,
     soundVolume: store.settings.soundVolume,
+    ignoreCase: store.settings.ignoreCase,
     onComplete: handleUnitComplete,
   });
 
@@ -310,6 +370,8 @@ export function App() {
 
   // Mode changes
   const handleModeChange = (newMode: 'single' | 'book' | 'continuous') => {
+    const currentStore = loadStore();
+    setStore(currentStore);
     setMode(newMode);
     setUnitIndex(1);
     setRunningTotals({
@@ -319,14 +381,23 @@ export function App() {
       totalTimeSec: 0,
       unitsCompleted: 0,
     });
-  };
+    setCompletedStats(null);
+    setSaveError(null);
+    setBookCompletionShown(false);
 
-  // Translation change
-  const handleLanguageChange = (lang: Translation) => {
-    setStore(prev => ({
-      ...prev,
-      settings: { ...prev.settings, language: lang },
-    }));
+    // Mode C: Lanjutkan - restore user's saved overall Bible position if available
+    if (newMode === 'continuous') {
+      if (currentStore.savedEntries.length > 0) {
+        const lastEntry = currentStore.savedEntries[currentStore.savedEntries.length - 1];
+        setBookId(lastEntry.bookId);
+        setChapter(lastEntry.chapter);
+        setVerse(lastEntry.verse);
+      } else if (currentStore.currentPosition) {
+        setBookId(currentStore.currentPosition.bookId);
+        setChapter(currentStore.currentPosition.chapter);
+        setVerse(currentStore.currentPosition.verse);
+      }
+    }
   };
 
   // Update settings
@@ -351,6 +422,7 @@ export function App() {
       totalTimeSec: 0,
       unitsCompleted: 0,
     });
+    setBookCompletionShown(false);
     restart();
   };
 
@@ -360,7 +432,7 @@ export function App() {
     return calculateCumulativeStats(runningTotals, liveStats);
   }, [mode, runningTotals, liveStats]);
 
-  // Passage/Verse selection handler
+  // Passage/Verse selection handler (Preserves exact selected book, chapter, and verse)
   const handlePassageSelect = (selection: {
     bookId: string;
     chapter: number;
@@ -379,6 +451,7 @@ export function App() {
     });
     setCompletedStats(null);
     setSaveError(null);
+    setBookCompletionShown(false);
     restart();
   };
 
@@ -389,17 +462,16 @@ export function App() {
     setVerse(jVerse);
     setCompletedStats(null);
     setSaveError(null);
+    setBookCompletionShown(false);
     restart();
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#1e1e24] text-[#d1d0c5]">
+    <div className="flex flex-col min-h-screen bg-[#0F172A] text-[#F1F5F9]">
       {/* Header */}
       <Header
-        language={store.settings.language}
         mode={mode}
         savedEntriesCount={store.savedEntries.length}
-        onLanguageChange={handleLanguageChange}
         onModeChange={handleModeChange}
         onOpenSettings={() => setShowSettings(true)}
         onOpenProgress={() => setShowProgress(true)}
@@ -419,7 +491,7 @@ export function App() {
               onClick={() => executeSaveVerse(liveStats, false)}
               className="px-3 py-1 bg-red-800 hover:bg-red-700 text-white rounded-lg font-semibold text-xs ml-2"
             >
-              Retry Save
+              Coba Simpan Lagi
             </button>
           </div>
         )}
@@ -428,58 +500,126 @@ export function App() {
         {saveSuccessNotice && (
           <div className="w-full max-w-4xl mb-3 p-2 bg-emerald-950/60 border border-emerald-700/60 rounded-xl text-xs text-emerald-300 flex items-center justify-center gap-2 shadow-sm animate-in fade-in">
             <CheckCircle2 size={15} />
-            <span>{saveSuccessNotice} successfully saved!</span>
+            <span>{saveSuccessNotice}</span>
           </div>
         )}
 
-        {/* Persistent Bible Reference Bar (Prominently visible while typing) */}
-        <div className="w-full max-w-4xl bg-[#24242e] border border-[#3b3c46] rounded-2xl p-4 mb-4 select-none shadow-md">
+        {/* Lanjutkan Mode Empty State Banner */}
+        {mode === 'continuous' && store.savedEntries.length === 0 && (
+          <div className="w-full max-w-4xl mb-3 p-3.5 bg-[#1E293B] border border-[#A78BFA]/40 rounded-xl text-xs text-[#F1F5F9] flex flex-col sm:flex-row items-center justify-between gap-3 shadow-md animate-in fade-in">
+            <div className="flex items-center gap-2">
+              <Sparkles size={16} className="text-[#A78BFA] shrink-0" />
+              <span>
+                Belum ada posisi tersimpan. Anda dapat mulai mengetik dari ayat saat ini, memilih ayat baru, atau mulai dari awal Alkitab.
+              </span>
+            </div>
+            <div className="flex items-center gap-2 shrink-0">
+              <button
+                onClick={() => handleJumpToVerse('GEN', 1, 1)}
+                className="px-3 py-1 bg-[#A78BFA] hover:bg-[#818CF8] text-[#0F172A] rounded-lg font-bold text-xs transition"
+              >
+                Mulai dari Kejadian 1:1
+              </button>
+              <button
+                onClick={() => setShowPassageSelector(true)}
+                className="px-3 py-1 bg-[#0F172A] border border-[#334155] hover:border-[#94A3B8] rounded-lg font-medium text-xs text-[#F1F5F9] transition"
+              >
+                Pilih Ayat
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Per Kitab Book Completion Banner */}
+        {mode === 'book' && (bookCompletionShown || (isCurrentVerseLastInBook && existingSavedEntry)) && (
+          <div className="w-full max-w-4xl mb-3 p-4 bg-emerald-950/40 border border-emerald-600/60 rounded-2xl text-xs text-emerald-200 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-md animate-in fade-in">
+            <div className="flex items-center gap-2.5">
+              <CheckCircle2 size={20} className="text-emerald-400 shrink-0" />
+              <div>
+                <p className="font-bold text-sm text-emerald-300">
+                  Selamat! Anda telah menyelesaikan seluruh kitab {currentBook?.nameId || currentVerseResult.bookName}.
+                </p>
+                <p className="text-[11px] text-emerald-400/80">
+                  Pilih kitab lain untuk diketik atau lanjutkan membaca ke kitab kanonikal berikutnya.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 shrink-0">
+              <button
+                onClick={() => setShowPassageSelector(true)}
+                className="px-3 py-1.5 bg-[#0F172A] border border-[#334155] hover:border-[#94A3B8] text-[#F1F5F9] rounded-xl font-medium text-xs flex items-center gap-1.5 transition"
+              >
+                <BookOpen size={14} />
+                <span>Pilih Kitab Lain</span>
+              </button>
+              {nextBook && (
+                <button
+                  onClick={handleContinueToNextBook}
+                  className="px-3.5 py-1.5 bg-[#A78BFA] hover:bg-[#818CF8] text-[#0F172A] rounded-xl font-bold text-xs flex items-center gap-1.5 transition shadow-sm"
+                >
+                  <span>Lanjut ke {nextBook.nameId}</span>
+                  <ArrowRight size={14} />
+                </button>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Persistent Bible Reference Bar */}
+        <div className="w-full max-w-4xl bg-[#1E293B] border border-[#334155] rounded-2xl p-4 mb-4 select-none shadow-md">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             {/* Current Reference & Status */}
             <div>
-              <div className="flex items-center gap-2">
-                <span className="text-xs uppercase tracking-wider text-[#646669] font-mono">Current verse</span>
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="text-xs uppercase tracking-wider text-[#94A3B8] font-mono">Ayat Saat Ini</span>
                 {existingSavedEntry ? (
                   <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-400 bg-emerald-950/40 border border-emerald-800/40 px-2 py-0.5 rounded-full">
                     <CheckCircle2 size={12} />
-                    <span>Saved</span>
+                    <span>Tersimpan</span>
                   </span>
                 ) : (
-                  <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#646669] bg-[#1e1e24] border border-[#3b3c46] px-2 py-0.5 rounded-full">
-                    <span>Unsaved</span>
+                  <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#94A3B8] bg-[#0F172A] border border-[#334155] px-2 py-0.5 rounded-full">
+                    <span>Belum Tersimpan</span>
                   </span>
                 )}
-                <span className="text-xs px-2 py-0.5 rounded bg-[#1e1e24] border border-[#3b3c46] text-[#e2b714] font-semibold">
-                  {currentVerseResult.translation}
+                <span className="text-xs px-2 py-0.5 rounded bg-[#0F172A] border border-[#334155] text-[#A78BFA] font-semibold">
+                  AYT
                 </span>
+
+                {/* Per Kitab Progress Badge */}
+                {mode === 'book' && totalVersesInCurrentBook > 0 && (
+                  <span className="text-[11px] px-2 py-0.5 rounded-full bg-[#0F172A] border border-[#334155] text-[#F1F5F9]">
+                    Ayat {currentVerseIndexInBook} dari {totalVersesInCurrentBook} ({bookProgressPercent}%)
+                  </span>
+                )}
               </div>
 
               {/* Clickable Large Reference */}
               <div className="flex items-baseline gap-2 mt-1">
                 <button
                   onClick={() => setShowPassageSelector(true)}
-                  className="text-xl md:text-2xl font-bold text-[#d1d0c5] hover:text-[#e2b714] transition flex items-center gap-2 group"
-                  title="Click to jump to another book, chapter, or verse"
+                  className="text-xl md:text-2xl font-bold text-[#F1F5F9] hover:text-[#A78BFA] transition flex items-center gap-2 group text-left"
+                  title="Klik untuk berpindah kitab, pasal, atau ayat"
                 >
                   <span>{currentVerseResult.reference}</span>
-                  <span className="text-xs text-[#646669] group-hover:text-[#e2b714] font-normal transition">
-                    (change)
+                  <span className="text-xs text-[#94A3B8] group-hover:text-[#A78BFA] font-normal transition">
+                    (ganti)
                   </span>
                 </button>
               </div>
 
               {/* Next verse indicator */}
-              <div className="text-xs text-[#646669] mt-1 font-mono">
+              <div className="text-xs text-[#94A3B8] mt-1 font-mono">
                 {nextVersePos.isEnd ? (
-                  <span className="text-[#e2b714]">Final verse of Revelation (End of Bible)</span>
+                  <span className="text-[#A78BFA]">Ayat terakhir Kitab Wahyu (Akhir Alkitab)</span>
                 ) : (
                   <span>
-                    Next verse:{' '}
-                    <strong className="text-[#d1d0c5]">
+                    Ayat berikutnya:{' '}
+                    <strong className="text-[#F1F5F9]">
                       {nextVerseResult?.reference}
                     </strong>
                     {nextVerseResult && !nextVerseResult.textAvailable && (
-                      <span className="text-[#e2b714]"> — no bundled {nextVerseResult.translation} text</span>
+                      <span className="text-[#A78BFA]"> — teks AYT belum tersedia</span>
                     )}
                   </span>
                 )}
@@ -492,21 +632,21 @@ export function App() {
               <button
                 onClick={handlePrevVerse}
                 disabled={prevVersePos.isStart}
-                className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-[#1e1e24] border border-[#3b3c46] text-xs font-semibold text-[#d1d0c5] hover:border-[#646669] disabled:opacity-40 disabled:cursor-not-allowed transition"
-                title="Go to previous verse"
+                className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-[#0F172A] border border-[#334155] text-xs font-semibold text-[#F1F5F9] hover:border-[#818CF8]/60 hover:text-[#A78BFA] disabled:opacity-40 disabled:cursor-not-allowed transition"
+                title="Kembali ke ayat sebelumnya"
               >
                 <ChevronLeft size={16} />
-                <span>Prev</span>
+                <span>Sebelumnya</span>
               </button>
 
               {/* Next Verse Button */}
               <button
                 onClick={handleNextVerse}
                 disabled={nextVersePos.isEnd}
-                className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-[#1e1e24] border border-[#3b3c46] text-xs font-semibold text-[#d1d0c5] hover:border-[#646669] disabled:opacity-40 disabled:cursor-not-allowed transition"
-                title="Go to next verse"
+                className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-[#0F172A] border border-[#334155] text-xs font-semibold text-[#F1F5F9] hover:border-[#818CF8]/60 hover:text-[#A78BFA] disabled:opacity-40 disabled:cursor-not-allowed transition"
+                title="Lanjut ke ayat berikutnya"
               >
-                <span>Next</span>
+                <span>Berikutnya</span>
                 <ChevronRight size={16} />
               </button>
 
@@ -514,15 +654,15 @@ export function App() {
               <button
                 onClick={() => executeSaveVerse(liveStats, true)}
                 disabled={!currentVerseResult.textAvailable}
-                className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-[#e2b714] hover:bg-[#f0c422] text-[#1e1e24] text-xs font-bold transition shadow-sm disabled:opacity-40 disabled:cursor-not-allowed"
+                className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-[#A78BFA] hover:bg-[#818CF8] text-[#0F172A] text-xs font-bold transition shadow-sm disabled:opacity-40 disabled:cursor-not-allowed"
                 title={
                   currentVerseResult.textAvailable
-                    ? 'Save current verse entry and advance to next verse'
-                    : `No authentic ${currentVerseResult.translation} text bundled for this verse`
+                    ? 'Simpan ayat saat ini dan lanjut ke ayat berikutnya'
+                    : 'Teks Alkitab AYT belum tersedia untuk ayat ini'
                 }
               >
                 <Save size={14} />
-                <span>Save & Next</span>
+                <span>Simpan & Lanjut</span>
               </button>
             </div>
           </div>
@@ -532,9 +672,9 @@ export function App() {
             (lastSavedEntry.bookId !== bookId ||
               lastSavedEntry.chapter !== chapter ||
               lastSavedEntry.verse !== verse) && (
-              <div className="mt-3 pt-2.5 border-t border-[#3b3c46]/60 flex items-center justify-between text-xs">
-                <span className="text-[#646669]">
-                  Last saved verse: <strong className="text-[#d1d0c5]">{lastSavedEntry.reference}</strong>
+              <div className="mt-3 pt-2.5 border-t border-[#334155]/60 flex items-center justify-between text-xs flex-wrap gap-2">
+                <span className="text-[#94A3B8]">
+                  Ayat terakhir tersimpan: <strong className="text-[#F1F5F9]">{lastSavedEntry.reference}</strong>
                 </span>
                 <button
                   onClick={() =>
@@ -544,10 +684,10 @@ export function App() {
                       lastSavedEntry.verse
                     )
                   }
-                  className="text-xs text-[#e2b714] hover:underline flex items-center gap-1"
+                  className="text-xs text-[#A78BFA] hover:underline flex items-center gap-1"
                 >
                   <RotateCcw size={12} />
-                  <span>Resume from last saved position</span>
+                  <span>Lanjutkan dari posisi tersimpan</span>
                 </button>
               </div>
             )}
@@ -563,6 +703,7 @@ export function App() {
             caretStyle={store.settings.caretStyle}
             fontSize={store.settings.fontSize}
             reducedMotion={store.settings.reducedMotion}
+            smoothScroll={store.settings.smoothScroll}
             liveStats={liveStats}
             onCharInput={handleCharInput}
             onBackspace={handleBackspace}
@@ -571,20 +712,16 @@ export function App() {
             onPauseToggle={handlePauseToggle}
           />
         ) : (
-          <div className="w-full max-w-4xl bg-[#24242e] border border-[#3b3c46] rounded-2xl p-8 text-center select-none shadow-md">
-            <AlertCircle size={28} className="mx-auto text-[#e2b714]" />
-            <h2 className="mt-3 text-lg font-semibold text-[#d1d0c5]">
-              No {currentVerseResult.translation} text available for {currentVerseResult.reference}
+          <div className="w-full max-w-4xl bg-[#1E293B] border border-[#334155] rounded-2xl p-8 text-center select-none shadow-md">
+            <AlertCircle size={28} className="mx-auto text-[#A78BFA]" />
+            <h2 className="mt-3 text-lg font-semibold text-[#F1F5F9]">
+              Teks Alkitab Belum Tersedia untuk {currentVerseResult.reference}
             </h2>
-            <p className="mt-2 text-sm text-[#646669] max-w-xl mx-auto">
-              This app only types scripture it actually has, so it will not invent or paraphrase a
-              verse here. The Indonesian <strong className="text-[#d1d0c5]">AYT</strong> translation
-              is bundled in full (66 books, 31,102 verses) — switch to it from the header. The
-              English <strong className="text-[#d1d0c5]">WEB</strong> translation currently bundles
-              only a small authentic excerpt.
+            <p className="mt-2 text-sm text-[#94A3B8] max-w-xl mx-auto">
+              Aplikasi ini hanya menampilkan teks Alkitab asli yang terverifikasi dan tidak membuat teks tiruan. Terjemahan Alkitab Yang Terbuka (AYT) tersedia lengkap sebanyak 66 kitab dan 31.102 ayat.
             </p>
-            <p className="mt-3 text-xs text-[#646669] font-mono">
-              Use Prev / Next above to keep moving through the Bible.
+            <p className="mt-3 text-xs text-[#94A3B8] font-mono">
+              Gunakan tombol Sebelumnya / Berikutnya di atas untuk berpindah ayat.
             </p>
           </div>
         )}
@@ -600,7 +737,7 @@ export function App() {
           currentChapter={chapter}
           currentStartVerse={verse}
           mode={mode}
-          language={store.settings.language}
+          language="AYT"
           onSelect={handlePassageSelect}
           onClose={() => setShowPassageSelector(false)}
         />
@@ -647,7 +784,7 @@ export function App() {
         />
       )}
 
-      {/* Results Summary Modal (When auto-continue is set to summary) */}
+      {/* Results Summary Modal */}
       {completedStats && (
         <ResultsModal
           unitStats={completedStats}
@@ -655,6 +792,8 @@ export function App() {
           mode={mode}
           reference={currentVerseResult.reference}
           hasNextUnit={!nextVersePos.isEnd}
+          isBookCompleted={mode === 'book' && isCurrentVerseLastInBook}
+          nextBookName={nextBook?.nameId}
           onRetry={() => {
             setCompletedStats(null);
             restart();
@@ -662,6 +801,16 @@ export function App() {
           onContinue={() => {
             executeSaveVerse(completedStats, true);
             setCompletedStats(null);
+          }}
+          onContinueToNextBook={() => {
+            executeSaveVerse(completedStats, false);
+            setCompletedStats(null);
+            handleContinueToNextBook();
+          }}
+          onSelectAnotherBook={() => {
+            executeSaveVerse(completedStats, false);
+            setCompletedStats(null);
+            setShowPassageSelector(true);
           }}
           onClose={() => {
             setCompletedStats(null);

@@ -3,8 +3,13 @@
  * Seamlessly handles typographic characters (curly quotes, dashes) on standard physical keyboards.
  */
 
-export function isCharMatch(typedChar: string, targetChar: string): boolean {
+export function isCharMatch(typedChar: string, targetChar: string, ignoreCase: boolean = false): boolean {
   if (typedChar === targetChar) return true;
+
+  // Case-insensitive comparison if ignoreCase toggle is enabled
+  if (ignoreCase && typedChar.toLowerCase() === targetChar.toLowerCase()) {
+    return true;
+  }
 
   // Typographic double quotes: “ ” vs straight "
   if (typedChar === '"' && (targetChar === '“' || targetChar === '”' || targetChar === '"')) {

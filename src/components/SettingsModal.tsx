@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { UserSettings, FontSize, CaretStyle, AutoContinueMode } from '../utils/storage';
+import { UserSettings } from '../utils/storage';
 import { X, Volume2, VolumeX, AlertTriangle, ShieldCheck } from 'lucide-react';
 
 interface SettingsModalProps {
@@ -19,13 +19,15 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-200">
-      <div className="relative w-full max-w-lg bg-[#24242e] border border-[#3b3c46] rounded-2xl p-6 shadow-2xl text-[#d1d0c5] flex flex-col max-h-[90vh]">
+      <div className="relative w-full max-w-lg bg-[#1E293B] border border-[#334155] rounded-2xl p-6 shadow-2xl text-[#F1F5F9] flex flex-col max-h-[90vh]">
         {/* Header */}
-        <div className="flex items-center justify-between pb-4 border-b border-[#3b3c46]">
-          <h2 className="text-lg font-bold text-[#d1d0c5]">Settings & Preferences</h2>
+        <div className="flex items-center justify-between pb-4 border-b border-[#334155]">
+          <h2 className="text-lg font-bold text-[#F1F5F9]">Pengaturan</h2>
           <button
             onClick={onClose}
-            className="text-[#646669] hover:text-[#d1d0c5] transition p-1"
+            className="text-[#94A3B8] hover:text-[#F1F5F9] transition p-1"
+            title="Tutup"
+            aria-label="Tutup"
           >
             <X size={20} />
           </button>
@@ -33,47 +35,29 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
 
         {/* Settings Body */}
         <div className="flex-1 overflow-y-auto py-4 space-y-5 pr-1">
-          {/* Preferred Language */}
-          <div className="flex items-center justify-between">
-            <div>
-              <span className="text-sm font-semibold text-[#d1d0c5] block">Bible Translation</span>
-              <span className="text-xs text-[#646669]">English (WEB) or Indonesian (AYT)</span>
-            </div>
-            <div className="flex rounded-xl bg-[#1e1e24] p-1 border border-[#3b3c46]">
-              {(['WEB', 'AYT'] as const).map(lang => (
-                <button
-                  key={lang}
-                  onClick={() => onUpdateSettings({ language: lang })}
-                  className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition ${
-                    settings.language === lang
-                      ? 'bg-[#e2b714] text-[#1e1e24]'
-                      : 'text-[#646669] hover:text-[#d1d0c5]'
-                  }`}
-                >
-                  {lang === 'WEB' ? 'English (WEB)' : 'Indonesian (AYT)'}
-                </button>
-              ))}
-            </div>
-          </div>
-
           {/* Auto-Continue Behavior */}
           <div className="flex items-center justify-between">
             <div>
-              <span className="text-sm font-semibold text-[#d1d0c5] block">Auto-Continue Behavior</span>
-              <span className="text-xs text-[#646669]">Action after finishing a chapter</span>
+              <span className="text-sm font-semibold text-[#F1F5F9] block">Lanjut Otomatis</span>
+              <span className="text-xs text-[#94A3B8]">Tindakan setelah menyelesaikan ayat</span>
             </div>
-            <div className="flex rounded-xl bg-[#1e1e24] p-1 border border-[#3b3c46]">
-              {(['immediate', 'summary'] as AutoContinueMode[]).map(mode => (
+            <div className="flex rounded-xl bg-[#0F172A] p-1 border border-[#334155]">
+              {(
+                [
+                  { mode: 'immediate', label: 'Langsung' },
+                  { mode: 'summary', label: 'Ringkasan' },
+                ] as const
+              ).map(({ mode, label }) => (
                 <button
                   key={mode}
                   onClick={() => onUpdateSettings({ autoContinue: mode })}
-                  className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition capitalize ${
+                  className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition ${
                     settings.autoContinue === mode
-                      ? 'bg-[#e2b714] text-[#1e1e24]'
-                      : 'text-[#646669] hover:text-[#d1d0c5]'
+                      ? 'bg-[#A78BFA] text-[#0F172A]'
+                      : 'text-[#94A3B8] hover:text-[#F1F5F9]'
                   }`}
                 >
-                  {mode === 'immediate' ? 'Immediate (Default)' : 'Summary Modal'}
+                  {label}
                 </button>
               ))}
             </div>
@@ -82,21 +66,27 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
           {/* Caret Style */}
           <div className="flex items-center justify-between">
             <div>
-              <span className="text-sm font-semibold text-[#d1d0c5] block">Caret Style</span>
-              <span className="text-xs text-[#646669]">Visual indicator for active key</span>
+              <span className="text-sm font-semibold text-[#F1F5F9] block">Gaya Kursor</span>
+              <span className="text-xs text-[#94A3B8]">Bentuk visual penunjuk ketikan</span>
             </div>
-            <div className="flex rounded-xl bg-[#1e1e24] p-1 border border-[#3b3c46]">
-              {(['line', 'block', 'underline'] as CaretStyle[]).map(style => (
+            <div className="flex rounded-xl bg-[#0F172A] p-1 border border-[#334155]">
+              {(
+                [
+                  { style: 'line', label: 'Garis' },
+                  { style: 'block', label: 'Blok' },
+                  { style: 'underline', label: 'Bawah' },
+                ] as const
+              ).map(({ style, label }) => (
                 <button
                   key={style}
                   onClick={() => onUpdateSettings({ caretStyle: style })}
-                  className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition capitalize ${
+                  className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition ${
                     settings.caretStyle === style
-                      ? 'bg-[#e2b714] text-[#1e1e24]'
-                      : 'text-[#646669] hover:text-[#d1d0c5]'
+                      ? 'bg-[#A78BFA] text-[#0F172A]'
+                      : 'text-[#94A3B8] hover:text-[#F1F5F9]'
                   }`}
                 >
-                  {style}
+                  {label}
                 </button>
               ))}
             </div>
@@ -105,21 +95,28 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
           {/* Font Size */}
           <div className="flex items-center justify-between">
             <div>
-              <span className="text-sm font-semibold text-[#d1d0c5] block">Font Size</span>
-              <span className="text-xs text-[#646669]">Passage text display size</span>
+              <span className="text-sm font-semibold text-[#F1F5F9] block">Ukuran Huruf</span>
+              <span className="text-xs text-[#94A3B8]">Ukuran tampilan teks ayat</span>
             </div>
-            <div className="flex rounded-xl bg-[#1e1e24] p-1 border border-[#3b3c46]">
-              {(['sm', 'md', 'lg', 'xl'] as FontSize[]).map(size => (
+            <div className="flex rounded-xl bg-[#0F172A] p-1 border border-[#334155]">
+              {(
+                [
+                  { size: 'sm', label: 'Kecil' },
+                  { size: 'md', label: 'Sedang' },
+                  { size: 'lg', label: 'Besar' },
+                  { size: 'xl', label: 'Ekstra' },
+                ] as const
+              ).map(({ size, label }) => (
                 <button
                   key={size}
                   onClick={() => onUpdateSettings({ fontSize: size })}
-                  className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition uppercase ${
+                  className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition ${
                     settings.fontSize === size
-                      ? 'bg-[#e2b714] text-[#1e1e24]'
-                      : 'text-[#646669] hover:text-[#d1d0c5]'
+                      ? 'bg-[#A78BFA] text-[#0F172A]'
+                      : 'text-[#94A3B8] hover:text-[#F1F5F9]'
                   }`}
                 >
-                  {size}
+                  {label}
                 </button>
               ))}
             </div>
@@ -128,61 +125,97 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
           {/* Typing Sound */}
           <div className="flex items-center justify-between">
             <div>
-              <span className="text-sm font-semibold text-[#d1d0c5] block">Typing Sound (Off by default)</span>
-              <span className="text-xs text-[#646669]">Mechanical key clicks via Web Audio</span>
+              <span className="text-sm font-semibold text-[#F1F5F9] block">Suara Ketikan</span>
+              <span className="text-xs text-[#94A3B8]">Efek suara ketukan tombol via Web Audio</span>
             </div>
             <button
               onClick={() => onUpdateSettings({ soundEnabled: !settings.soundEnabled })}
               className={`flex items-center gap-2 px-3 py-1.5 rounded-xl border text-xs font-semibold transition ${
                 settings.soundEnabled
-                  ? 'bg-[#e2b714]/15 border-[#e2b714] text-[#e2b714]'
-                  : 'bg-[#1e1e24] border-[#3b3c46] text-[#646669]'
+                  ? 'bg-[#A78BFA]/15 border-[#A78BFA] text-[#A78BFA]'
+                  : 'bg-[#0F172A] border-[#334155] text-[#94A3B8]'
               }`}
             >
               {settings.soundEnabled ? <Volume2 size={16} /> : <VolumeX size={16} />}
-              <span>{settings.soundEnabled ? 'Enabled' : 'Disabled'}</span>
+              <span>{settings.soundEnabled ? 'Aktif' : 'Nonaktif'}</span>
             </button>
           </div>
 
-          {/* Reduced Motion */}
+          {/* Reduced Motion (Kurangi Motion) */}
           <div className="flex items-center justify-between">
             <div>
-              <span className="text-sm font-semibold text-[#d1d0c5] block">Reduced Motion</span>
-              <span className="text-xs text-[#646669]">Disable caret blinking and smooth scroll</span>
+              <span className="text-sm font-semibold text-[#F1F5F9] block">Kurangi Motion</span>
+              <span className="text-xs text-[#94A3B8]">Kurangi animasi dan gerakan untuk pengalaman mengetik yang lebih nyaman.</span>
             </div>
             <button
               onClick={() => onUpdateSettings({ reducedMotion: !settings.reducedMotion })}
               className={`px-3 py-1.5 rounded-xl border text-xs font-semibold transition ${
                 settings.reducedMotion
-                  ? 'bg-[#e2b714]/15 border-[#e2b714] text-[#e2b714]'
-                  : 'bg-[#1e1e24] border-[#3b3c46] text-[#646669]'
+                  ? 'bg-[#A78BFA]/15 border-[#A78BFA] text-[#A78BFA]'
+                  : 'bg-[#0F172A] border-[#334155] text-[#94A3B8]'
               }`}
             >
-              {settings.reducedMotion ? 'On' : 'Off'}
+              {settings.reducedMotion ? 'Aktif' : 'Nonaktif'}
+            </button>
+          </div>
+
+          {/* Smooth Scroll */}
+          <div className="flex items-center justify-between">
+            <div>
+              <span className="text-sm font-semibold text-[#F1F5F9] block">Smooth Scroll</span>
+              <span className="text-xs text-[#94A3B8]">Gunakan perpindahan yang lebih halus saat berpindah ayat.</span>
+            </div>
+            <button
+              onClick={() => onUpdateSettings({ smoothScroll: !settings.smoothScroll })}
+              className={`px-3 py-1.5 rounded-xl border text-xs font-semibold transition ${
+                settings.smoothScroll
+                  ? 'bg-[#A78BFA]/15 border-[#A78BFA] text-[#A78BFA]'
+                  : 'bg-[#0F172A] border-[#334155] text-[#94A3B8]'
+              }`}
+            >
+              {settings.smoothScroll ? 'Aktif' : 'Nonaktif'}
+            </button>
+          </div>
+
+          {/* Ignore Capital Letters (Case-Insensitive) */}
+          <div className="flex items-center justify-between">
+            <div>
+              <span className="text-sm font-semibold text-[#F1F5F9] block">Abaikan Huruf Besar/Kecil</span>
+              <span className="text-xs text-[#94A3B8]">Ketik tanpa membedakan kapitalisasi huruf</span>
+            </div>
+            <button
+              onClick={() => onUpdateSettings({ ignoreCase: !settings.ignoreCase })}
+              className={`px-3 py-1.5 rounded-xl border text-xs font-semibold transition ${
+                settings.ignoreCase
+                  ? 'bg-[#A78BFA]/15 border-[#A78BFA] text-[#A78BFA]'
+                  : 'bg-[#0F172A] border-[#334155] text-[#94A3B8]'
+              }`}
+            >
+              {settings.ignoreCase ? 'Aktif' : 'Nonaktif'}
             </button>
           </div>
 
           {/* Reset Progress Section */}
-          <div className="pt-3 border-t border-[#3b3c46]">
+          <div className="pt-3 border-t border-[#334155]">
             {!showResetConfirm ? (
               <button
                 onClick={() => setShowResetConfirm(true)}
                 className="w-full py-2.5 rounded-xl bg-red-950/30 hover:bg-red-950/60 border border-red-800/40 text-red-300 text-xs font-semibold transition flex items-center justify-center gap-2"
               >
                 <AlertTriangle size={15} />
-                <span>Reset All Progress & Personal Bests</span>
+                <span>Reset Semua Progres & Rekor Terbaik</span>
               </button>
             ) : (
               <div className="p-3 bg-red-950/40 border border-red-800 rounded-xl space-y-2">
                 <p className="text-xs text-red-200">
-                  Are you sure? This will permanently delete your typing stats, completed passages, and active runs.
+                  Apakah Anda yakin? Tindakan ini akan menghapus semua statistik ketikan, ayat yang telah selesai, dan progres latihan Anda secara permanen.
                 </p>
                 <div className="flex items-center justify-end gap-2">
                   <button
                     onClick={() => setShowResetConfirm(false)}
-                    className="px-3 py-1 bg-[#24242e] rounded-lg text-xs text-[#d1d0c5] hover:bg-[#3b3c46]"
+                    className="px-3 py-1 bg-[#1E293B] rounded-lg text-xs text-[#F1F5F9] hover:bg-[#334155]"
                   >
-                    Cancel
+                    Batal
                   </button>
                   <button
                     onClick={() => {
@@ -191,7 +224,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                     }}
                     className="px-3 py-1 bg-red-600 hover:bg-red-700 text-white rounded-lg text-xs font-semibold"
                   >
-                    Confirm Reset
+                    Konfirmasi Reset
                   </button>
                 </div>
               </div>
@@ -199,16 +232,13 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
           </div>
 
           {/* Licensing Attribution */}
-          <div className="pt-3 border-t border-[#3b3c46] text-[11px] text-[#646669] space-y-1.5">
-            <div className="flex items-center gap-1.5 text-[#d1d0c5] font-semibold">
-              <ShieldCheck size={14} className="text-[#e2b714]" />
-              <span>Licensing & Translation Information</span>
+          <div className="pt-3 border-t border-[#334155] text-[11px] text-[#94A3B8] space-y-1.5">
+            <div className="flex items-center gap-1.5 text-[#F1F5F9] font-semibold">
+              <ShieldCheck size={14} className="text-[#A78BFA]" />
+              <span>Informasi Lisensi & Terjemahan</span>
             </div>
             <p>
-              <strong>WEB:</strong> World English Bible is in the Public Domain.
-            </p>
-            <p>
-              <strong>AYT:</strong> Alkitab Terjemahan Terbuka © Yayasan Lembaga SABDA (YLSA) / sabda.org. Digunakan di bawah lisensi CC BY-SA 4.0 untuk non-komersial.
+              <strong>AYT:</strong> Alkitab Terjemahan Terbuka © Yayasan Lembaga SABDA (YLSA) / sabda.org. Digunakan di bawah lisensi CC BY-NC-SA untuk non-komersial.
             </p>
           </div>
         </div>

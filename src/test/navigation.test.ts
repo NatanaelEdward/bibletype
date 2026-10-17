@@ -51,13 +51,12 @@ describe('Navigation Logic', () => {
     expect(next.hasNext).toBe(false);
   });
 
-  it('correctly handles passage verse slicing for Continuous mode starting verse', () => {
-    // John 3 starting at verse 16. Only the bundled authentic WEB verses are returned, so the
-    // reported range stops at the last verse that really has text (16-18), never 16-36.
-    const passage = getPassage('JHN', 3, 16, undefined, 'WEB');
+  it('correctly handles passage verse slicing for starting verse', () => {
+    // Yohanes 3 starting at verse 16 to 18
+    const passage = getPassage('JHN', 3, 16, 18, 'AYT');
     expect(passage.startVerse).toBe(16);
-    expect(passage.reference).toContain('John 3:16');
-    expect(passage.fullText).toContain('For God so loved the world');
+    expect(passage.reference).toContain('Yohanes 3:16');
+    expect(passage.fullText).toContain('Karena Allah sangat mengasihi dunia ini');
     expect(passage.textAvailable).toBe(true);
     expect(passage.verses.map(v => v.verseNumber)).toEqual([16, 17, 18]);
   });

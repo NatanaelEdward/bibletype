@@ -2,13 +2,18 @@
 
 @layer base {
   :root {
-    --bg-main: #1e1e24;
-    --bg-surface: #24242e;
-    --text-muted: #646669;
-    --text-active: #d1d0c5;
-    --text-error: #ca4754;
-    --text-error-bg: rgba(202, 71, 84, 0.2);
-    --accent: #e2b714;
+    --bg-main: #0F172A;
+    --bg-surface: #1E293B;
+    --bg-elevated: #243248;
+    --border-color: #334155;
+    --text-muted: #94A3B8;
+    --text-active: #F1F5F9;
+    --text-error: #FCA5A5;
+    --text-error-bg: rgba(252, 165, 165, 0.16);
+    --accent: #A78BFA;
+    --accent-secondary: #818CF8;
+    --accent-light: #C7D2FE;
+    --success: #86EFAC;
   }
 
   body {
@@ -58,7 +63,7 @@
 /* Smooth windowed typing scroll */
 .typing-scroll-container {
   scrollbar-width: thin;
-  scrollbar-color: #3b3c46 transparent;
+  scrollbar-color: #334155 transparent;
   scroll-behavior: smooth;
 }
 
@@ -71,7 +76,7 @@
 }
 
 .typing-scroll-container::-webkit-scrollbar-thumb {
-  background-color: #3b3c46;
+  background-color: #334155;
   border-radius: 9999px;
 }
 

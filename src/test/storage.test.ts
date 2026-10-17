@@ -54,6 +54,8 @@ describe('Storage & Migration', () => {
         soundVolume: 0.5,
         autoContinue: 'summary',
         reducedMotion: true,
+        smoothScroll: true,
+        ignoreCase: false,
       },
       progress: {
         personalBests: {
@@ -124,6 +126,8 @@ describe('Storage & Migration', () => {
         soundVolume: 0.3,
         autoContinue: 'summary',
         reducedMotion: false,
+        smoothScroll: true,
+        ignoreCase: false,
       },
       progress: {
         personalBests: { highestWpm: 120, highestAccuracy: 100, longestStreakDays: 10 },

@@ -13,6 +13,8 @@ export interface UserSettings {
   soundVolume: number;
   autoContinue: AutoContinueMode;
   reducedMotion: boolean;
+  smoothScroll: boolean;
+  ignoreCase: boolean;
 }
 
 export interface SessionRecord {
@@ -89,6 +91,8 @@ export const DEFAULT_SETTINGS: UserSettings = {
   soundVolume: 0.2,
   autoContinue: 'immediate',
   reducedMotion: false,
+  smoothScroll: true,
+  ignoreCase: false,
 };
 
 export const DEFAULT_PROGRESS: UserProgress = {
@@ -131,9 +135,9 @@ export function migrateStore(raw: unknown): BibleTypeStore {
     savedEntries?: unknown[];
   };
 
-  // Migrate or preserve settings
+  // Migrate or preserve settings (AYT only)
   const settings: UserSettings = {
-    language: data.settings?.language === 'WEB' ? 'WEB' : 'AYT',
+    language: 'AYT',
     fontSize: ['sm', 'md', 'lg', 'xl'].includes(data.settings?.fontSize as string)
       ? (data.settings?.fontSize as FontSize)
       : 'md',
@@ -146,6 +150,8 @@ export function migrateStore(raw: unknown): BibleTypeStore {
       : 0.2,
     autoContinue: data.settings?.autoContinue === 'summary' ? 'summary' : 'immediate',
     reducedMotion: Boolean(data.settings?.reducedMotion),
+    smoothScroll: data.settings?.smoothScroll !== undefined ? Boolean(data.settings.smoothScroll) : true,
+    ignoreCase: Boolean(data.settings?.ignoreCase),
   };
 
   // Migrate or preserve progress

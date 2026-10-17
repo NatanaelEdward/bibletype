@@ -21,16 +21,18 @@ export const ProgressModal: React.FC<ProgressModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-200">
-      <div className="relative w-full max-w-xl bg-[#24242e] border border-[#3b3c46] rounded-2xl p-6 shadow-2xl text-[#d1d0c5] flex flex-col max-h-[85vh]">
+      <div className="relative w-full max-w-xl bg-[#1E293B] border border-[#334155] rounded-2xl p-6 shadow-2xl text-[#F1F5F9] flex flex-col max-h-[85vh]">
         {/* Header */}
-        <div className="flex items-center justify-between pb-4 border-b border-[#3b3c46]">
-          <h2 className="text-lg font-bold text-[#d1d0c5] flex items-center gap-2">
-            <Award className="text-[#e2b714]" size={20} />
-            <span>Progress & Personal Bests</span>
+        <div className="flex items-center justify-between pb-4 border-b border-[#334155]">
+          <h2 className="text-lg font-bold text-[#F1F5F9] flex items-center gap-2">
+            <Award className="text-[#A78BFA]" size={20} />
+            <span>Progres & Rekor Terbaik</span>
           </h2>
           <button
             onClick={onClose}
-            className="text-[#646669] hover:text-[#d1d0c5] transition p-1"
+            className="text-[#94A3B8] hover:text-[#F1F5F9] transition p-1"
+            title="Tutup"
+            aria-label="Tutup"
           >
             <X size={20} />
           </button>
@@ -40,16 +42,16 @@ export const ProgressModal: React.FC<ProgressModalProps> = ({
         <div className="flex-1 overflow-y-auto py-4 space-y-5 pr-1">
           {/* Active Saved Run (if exists) */}
           {activeRun && (
-            <div className="p-4 rounded-xl bg-[#e2b714]/10 border border-[#e2b714]/40 flex items-center justify-between">
+            <div className="p-4 rounded-xl bg-[#A78BFA]/10 border border-[#A78BFA]/40 flex items-center justify-between">
               <div>
-                <span className="text-[11px] uppercase tracking-wider text-[#e2b714] font-semibold block">
-                  Active {activeRun.mode.toUpperCase()} Run In Progress
+                <span className="text-[11px] uppercase tracking-wider text-[#A78BFA] font-semibold block">
+                  Latihan {activeRun.mode === 'book' ? 'Per Kitab' : 'Lanjutkan'} Berjalan
                 </span>
-                <span className="text-sm font-bold text-[#d1d0c5]">
-                  {activeBook?.nameEn || activeRun.bookId} Chapter {activeRun.chapter}
+                <span className="text-sm font-bold text-[#F1F5F9]">
+                  {activeBook?.nameId || activeRun.bookId} Pasal {activeRun.chapter}
                 </span>
-                <div className="text-xs text-[#646669] mt-0.5">
-                  Completed {activeRun.runningTotals.unitsCompleted} chapters • {activeRun.runningTotals.totalChars} chars typed
+                <div className="text-xs text-[#94A3B8] mt-0.5">
+                  Selesai {activeRun.runningTotals.unitsCompleted} ayat • {activeRun.runningTotals.totalChars} karakter diketik
                 </div>
               </div>
               {onResumeRun && (
@@ -58,10 +60,10 @@ export const ProgressModal: React.FC<ProgressModalProps> = ({
                     onResumeRun();
                     onClose();
                   }}
-                  className="px-4 py-2 bg-[#e2b714] hover:bg-[#f0c422] text-[#1e1e24] font-bold text-xs rounded-xl flex items-center gap-1.5 transition"
+                  className="px-4 py-2 bg-[#A78BFA] hover:bg-[#818CF8] text-[#0F172A] font-bold text-xs rounded-xl flex items-center gap-1.5 transition shadow-sm"
                 >
                   <Play size={14} />
-                  <span>Resume</span>
+                  <span>Lanjutkan</span>
                 </button>
               )}
             </div>
@@ -69,21 +71,21 @@ export const ProgressModal: React.FC<ProgressModalProps> = ({
 
           {/* Personal Bests Cards */}
           <div className="grid grid-cols-3 gap-3">
-            <div className="bg-[#1e1e24] p-3.5 rounded-xl border border-[#3b3c46] text-center">
-              <span className="text-xs text-[#646669] block">Best Net WPM</span>
-              <span className="text-2xl font-bold text-[#e2b714]">
+            <div className="bg-[#0F172A] p-3.5 rounded-xl border border-[#334155] text-center">
+              <span className="text-xs text-[#94A3B8] block">WPM Bersih Terbaik</span>
+              <span className="text-2xl font-bold text-[#A78BFA]">
                 {progress.personalBests.highestWpm}
               </span>
             </div>
-            <div className="bg-[#1e1e24] p-3.5 rounded-xl border border-[#3b3c46] text-center">
-              <span className="text-xs text-[#646669] block">Best Accuracy</span>
-              <span className="text-2xl font-bold text-[#d1d0c5]">
+            <div className="bg-[#0F172A] p-3.5 rounded-xl border border-[#334155] text-center">
+              <span className="text-xs text-[#94A3B8] block">Akurasi Terbaik</span>
+              <span className="text-2xl font-bold text-[#F1F5F9]">
                 {progress.personalBests.highestAccuracy}%
               </span>
             </div>
-            <div className="bg-[#1e1e24] p-3.5 rounded-xl border border-[#3b3c46] text-center">
-              <span className="text-xs text-[#646669] block">Passages Done</span>
-              <span className="text-2xl font-bold text-[#4ecca3]">
+            <div className="bg-[#0F172A] p-3.5 rounded-xl border border-[#334155] text-center">
+              <span className="text-xs text-[#94A3B8] block">Ayat Selesai</span>
+              <span className="text-2xl font-bold text-[#86EFAC]">
                 {completedCount}
               </span>
             </div>
@@ -91,40 +93,48 @@ export const ProgressModal: React.FC<ProgressModalProps> = ({
 
           {/* Recent Sessions */}
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-[#646669] mb-2 flex items-center gap-1.5">
-              <Flame size={14} className="text-[#e2b714]" />
-              <span>Recent Sessions</span>
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-[#94A3B8] mb-2 flex items-center gap-1.5">
+              <Flame size={14} className="text-[#A78BFA]" />
+              <span>Sesi Terbaru</span>
             </h3>
 
             {progress.recentSessions.length === 0 ? (
-              <div className="p-6 text-center text-xs text-[#646669] bg-[#1e1e24] rounded-xl border border-[#3b3c46]">
-                No completed sessions yet. Start typing a passage above!
+              <div className="p-6 text-center text-xs text-[#94A3B8] bg-[#0F172A] rounded-xl border border-[#334155]">
+                Belum ada sesi yang selesai. Mulai mengetik ayat di atas!
               </div>
             ) : (
               <div className="space-y-2 max-h-56 overflow-y-auto pr-1">
-                {progress.recentSessions.map(session => (
-                  <div
-                    key={session.id}
-                    className="p-3 bg-[#1e1e24] rounded-xl border border-[#3b3c46] flex items-center justify-between text-xs"
-                  >
-                    <div>
-                      <span className="font-semibold text-[#d1d0c5] block">
-                        {session.reference} ({session.translation})
-                      </span>
-                      <span className="text-[10px] text-[#646669]">
-                        {new Date(session.date).toLocaleDateString()} • {session.mode}
-                      </span>
+                {progress.recentSessions.map(session => {
+                  const modeLabel =
+                    session.mode === 'book'
+                      ? 'Per Kitab'
+                      : session.mode === 'continuous'
+                      ? 'Lanjutkan'
+                      : 'Ayat Pilihan';
+                  return (
+                    <div
+                      key={session.id}
+                      className="p-3 bg-[#0F172A] rounded-xl border border-[#334155] flex items-center justify-between text-xs"
+                    >
+                      <div>
+                        <span className="font-semibold text-[#F1F5F9] block">
+                          {session.reference}
+                        </span>
+                        <span className="text-[10px] text-[#94A3B8]">
+                          {new Date(session.date).toLocaleDateString('id-ID')} • {modeLabel}
+                        </span>
+                      </div>
+                      <div className="text-right">
+                        <span className="text-[#A78BFA] font-bold text-sm block">
+                          {session.netWpm} WPM
+                        </span>
+                        <span className="text-[10px] text-[#94A3B8]">
+                          {session.accuracy}% akurasi • {session.elapsedSeconds}d
+                        </span>
+                      </div>
                     </div>
-                    <div className="text-right">
-                      <span className="text-[#e2b714] font-bold text-sm block">
-                        {session.netWpm} WPM
-                      </span>
-                      <span className="text-[10px] text-[#646669]">
-                        {session.accuracy}% acc • {session.elapsedSeconds}s
-                      </span>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             )}
           </div>
@@ -132,17 +142,17 @@ export const ProgressModal: React.FC<ProgressModalProps> = ({
           {/* Completed Passages List */}
           {completedCount > 0 && (
             <div>
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-[#646669] mb-2 flex items-center gap-1.5">
-                <CheckCircle size={14} className="text-[#4ecca3]" />
-                <span>Completed Scriptures ({completedCount})</span>
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-[#94A3B8] mb-2 flex items-center gap-1.5">
+                <CheckCircle size={14} className="text-[#86EFAC]" />
+                <span>Ayat yang Telah Selesai ({completedCount})</span>
               </h3>
               <div className="flex flex-wrap gap-2">
                 {Object.entries(progress.completedPassages).map(([ref, data]) => (
                   <span
                     key={ref}
-                    className="text-xs px-2.5 py-1 bg-[#1e1e24] border border-[#3b3c46] rounded-lg text-[#d1d0c5]"
+                    className="text-xs px-2.5 py-1 bg-[#0F172A] border border-[#334155] rounded-lg text-[#F1F5F9]"
                   >
-                    {ref} <strong className="text-[#e2b714] ml-1">{data.bestWpm} WPM</strong>
+                    {ref} <strong className="text-[#A78BFA] ml-1">{data.bestWpm} WPM</strong>
                   </span>
                 ))}
               </div>
